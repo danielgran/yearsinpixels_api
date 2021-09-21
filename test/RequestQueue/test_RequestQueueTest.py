@@ -1,5 +1,6 @@
 import unittest
 
+from Request.Request import Request
 from RequestQueue.RequestQueue import RequestQueue
 
 
@@ -13,5 +14,8 @@ class RequestQueueTest(unittest.TestCase):
 
     def test_add_ingoing_request(self):
         requestQueue = RequestQueue()
-        requestQueue.add_incoming_reqeuest(Request)
+        id = requestQueue.add_incoming_request(Request())
+
+        self.assertTrue(id)
+
 

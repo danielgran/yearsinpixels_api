@@ -4,7 +4,7 @@ from Request.Request import Request
 
 class RequestUtility:
     @staticmethod
-    def create_request(self):
+    def create_request():
         return Request()
 
 
@@ -18,7 +18,7 @@ class RequestTest(unittest.TestCase):
         request = RequestUtility.create_request()
         request.header = {'server': "cloudflare"}
         self.assertTrue(request.header['server'])
-        self.assertFalse(request.header['shouldNotExist'], "Request has flag that should not exist")
+        self.assertFalse(request.header.get('shouldNotExist'), "Request has flag that should not exist")
 
     def test_set_body(self):
         request = RequestUtility.create_request()
