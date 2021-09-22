@@ -1,5 +1,5 @@
 # Accepts the http request directly and sends it to specific endpoint method
-from EndPoint.EndPoint import EndPoint
+from src.EndPoint.EndPoint import EndPoint
 
 
 class WebHost:
@@ -17,9 +17,6 @@ class WebHost:
             self.endpoints.pop(path)
 
     def handle_request(self, path, request_header, request_body):
-
-        #
-
         if self.endpoints.get(path):
 
 

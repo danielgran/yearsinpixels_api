@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: yearsinpixels-api
+Version: 0.0.1
+Summary: Second layer
+Home-page: https://www.yearsinpixels.com
+Author: Daniel Gran
+Author-email: daniel.gran@mailbox.org
+License: UNKNOWN
+Project-URL: Repository, https://github.com/danielgran/yearsinpixels_business
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown; charset=UTF-8
+
+# Years In Pixels API Layer
+
+This is currently the second layer
+

@@ -1,4 +1,5 @@
-from EndPoint.WebHost import WebHost
+from src.EndPoint.WebHost import WebHost
+
 
 class ConcreteFactory:
 
@@ -7,4 +8,4 @@ class ConcreteFactory:
 
     @staticmethod
     def CreateWebHost(hostname):
-        return WebHost(hostname);
+        return WebHost(hostname)
