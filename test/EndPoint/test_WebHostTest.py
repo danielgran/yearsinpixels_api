@@ -1,7 +1,7 @@
 import unittest
 
-from EndPoint.EndPoint import EndPoint
-from Main.ConcreteFactory import ConcreteFactory
+from src.EndPoint.EndPoint import EndPoint
+from src.Main.ConcreteFactory import ConcreteFactory
 
 
 class WebHostUtility:

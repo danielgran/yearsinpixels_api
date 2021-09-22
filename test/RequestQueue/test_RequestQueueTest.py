@@ -1,7 +1,7 @@
 import unittest
 
-from Request.Request import Request
-from RequestQueue.RequestQueue import RequestQueue
+from src.Request.Request import Request
+from src.RequestQueue.RequestQueue import RequestQueue
 
 
 class RequestQueueTest(unittest.TestCase):

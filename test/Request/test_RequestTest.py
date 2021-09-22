@@ -2,7 +2,7 @@ import os
 
 import unittest
 
-from Request.Request import Request
+from src.Request.Request import Request
 
 
 class RequestUtility:

@@ -1,6 +1,6 @@
 import unittest
 
-from EndPoint.EndPoint import EndPoint
+from src.EndPoint.EndPoint import EndPoint
 
 
 class TestEndpointUtility:
