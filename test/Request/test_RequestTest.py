@@ -1,11 +1,16 @@
+import os
+
 import unittest
 
+# remove-candidate:
+# sys.path.append(os.path.join(os.path.join(os.path.dirname(os.path.dirname(__file__)),'src')))
 from Request.Request import Request
+
 
 class RequestUtility:
     @staticmethod
     def create_request():
-        return Request()
+        return Request("/examplepath")
 
 
 class RequestTest(unittest.TestCase):
@@ -24,3 +29,7 @@ class RequestTest(unittest.TestCase):
         request = RequestUtility.create_request()
         request.body = "checkBody"
         self.assertTrue(request.body)
+
+    def test_requestpath(self):
+        request = RequestUtility.create_request()
+        self.assertTrue(request.path)
