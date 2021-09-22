@@ -1,5 +1,0 @@
-EndPoint
-Main
-Request
-RequestQueue
-RequestTranslations
