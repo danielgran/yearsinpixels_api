@@ -21,3 +21,14 @@ class WebHost:
         if self.endpoints.get(path):
             self.endpoints.pop(path)
 
+    def handle_request(self, request):
+        if self.endpoints.get(request.path):
+            self.endpoints.get(request.path).process_request(request)
+        pass
+
+
+
+
+
+
+

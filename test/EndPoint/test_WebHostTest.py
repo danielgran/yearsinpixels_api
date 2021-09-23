@@ -4,6 +4,7 @@ from src.EndPoint.EndPoint import EndPoint
 from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 from src.Main.ConcreteFactory import ConcreteFactory
 from src.Request.Request import Request
+from src.RequestQueue.RequestQueue import RequestQueue
 
 
 class WebHostUtility:
@@ -16,7 +17,10 @@ class WebHostUtility:
     def create_webhost():
         hostname = "localhost"
         webhost = WebHostUtility.create_factory().CreateWebHost(hostname)
-        webhost.add_endpoint(EndPoint("/examplepath"))
+        endpoint = EndPoint("/examplepath")
+        request_queue = RequestQueue()
+        endpoint.set_request_queue(request_queue)
+        webhost.add_endpoint(endpoint)
         return webhost
 
     @staticmethod
