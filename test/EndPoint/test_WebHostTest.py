@@ -1,7 +1,9 @@
 import unittest
 
 from src.EndPoint.EndPoint import EndPoint
+from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 from src.Main.ConcreteFactory import ConcreteFactory
+from src.Request.Request import Request
 
 
 class WebHostUtility:
@@ -55,9 +57,19 @@ class TestWebHost(unittest.TestCase):
         self.assertTrue(len(webhost.endpoints) == 0, 'Endpoint did not get removed');
         webhost.remove_endpoint("/thisEndpointDoesNotExist")
 
+    def test_expose_webserver(self):
+        webhost = WebHostUtility.create_webhost()
+        testStrategy = ConcreteTestStrategy()
+        webhost.setup_expose_strategy(testStrategy)
+        self.assertTrue(webhost.exposeStrategy, "Webhost does not have an exposeStrategy")
+
     def test_handle_request(self):
         webhost = WebHostUtility.create_webhost()
-        webhost.handle_request("/examplepath", WebHostUtility.sample_header(), "request_body")
-        # test the queue behavior
+        teststrategy = ConcreteTestStrategy()
+        webhost.setup_expose_strategy(teststrategy)
+        request = Request("/examplepath")
+        webhost.handle_request(request)
+
+
 
 
