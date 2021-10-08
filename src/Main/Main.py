@@ -5,7 +5,8 @@ from src.Main.ConcreteFactory import ConcreteFactory
 
 def main():
     fac = ConcreteFactory()
-    fac.CreateWebHost("localhost")
+    webhost = fac.CreateWebHost("localhost")
+    webhost.e
 
 
 

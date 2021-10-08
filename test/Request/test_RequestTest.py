@@ -2,13 +2,13 @@ import os
 
 import unittest
 
-from src.Request.Request import Request
+from src.Request.RawRequest import RawRequest
 
 
 class RequestUtility:
     @staticmethod
     def create_request():
-        return Request("/examplepath")
+        return RawRequest("/examplepath")
 
 
 class RequestTest(unittest.TestCase):

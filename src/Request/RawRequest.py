@@ -1,4 +1,4 @@
-class Request:
+class RawRequest:
 
     header = {}
     body = ""

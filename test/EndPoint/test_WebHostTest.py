@@ -3,7 +3,7 @@ import unittest
 from src.EndPoint.EndPoint import EndPoint
 from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 from src.Main.ConcreteFactory import ConcreteFactory
-from src.Request.Request import Request
+from src.Request.RawRequest import RawRequest
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -71,9 +71,11 @@ class TestWebHost(unittest.TestCase):
         webhost = WebHostUtility.create_webhost()
         teststrategy = ConcreteTestStrategy()
         webhost.setup_expose_strategy(teststrategy)
-        request = Request("/examplepath")
+        request = RawRequest("/examplepath")
         webhost.handle_request(request)
 
+        request.path = "/thisshouldnotwork"
+        self.assertRaises(Exception, webhost.handle_request, request)
 
 
 

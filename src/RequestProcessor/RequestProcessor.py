@@ -1,4 +1,8 @@
-class RequestProcessor:
+from abc import ABC, abstractmethod
 
 
-    pass
+class RequestProcessor(ABC):
+
+    @abstractmethod
+    def process():
+        pass

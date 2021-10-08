@@ -1,7 +1,7 @@
 import unittest
 
 from src.EndPoint.EndPoint import EndPoint
-from src.Request.Request import Request
+from src.Request.RawRequest import RawRequest
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -28,7 +28,7 @@ class TestEndpoint(unittest.TestCase):
 
     def test_process_request(self):
         endpoint = TestEndpointUtility.create_endpoint()
-        request = Request("/examplepath")
+        request = RawRequest("/examplepath")
         self.assertRaises(Exception, endpoint.process_request, request)
 
         request_queue = RequestQueue()
