@@ -26,5 +26,5 @@ class EndPoint:
             return False
 
 
-    def get_no_open_requests(self):
+    def get_no_open_requests(self) :
         return len(self.request_queue)

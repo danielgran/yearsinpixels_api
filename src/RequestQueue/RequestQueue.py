@@ -3,11 +3,12 @@ import uuid
 
 class RequestQueue:
 
-    ingoing_queue = {}
-    outgoing_queue = {}
+    ingoing_queue = None
+    outgoing_queue = None
 
     def __init__(self):
-        pass
+        self.ingoing_queue = {}
+        self.outgoing_queue = {}
 
     def __len__(self):
         return len(self.ingoing_queue)

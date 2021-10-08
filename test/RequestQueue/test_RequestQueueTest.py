@@ -8,7 +8,7 @@ class RequestQueueTest(unittest.TestCase):
 
     def test_creation(self):
         requestQueue = RequestQueue()
-        self.assertTrue(requestQueue)
+        self.assertIsNotNone(requestQueue)
 
     def test_add_ingoing_request(self):
         requestQueue = RequestQueue()
