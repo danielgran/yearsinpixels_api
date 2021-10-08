@@ -1,6 +1,12 @@
 build==0.7.0
+click==8.0.1
+Flask==2.0.2
+itsdangerous==2.0.1
+Jinja2==3.0.2
+MarkupSafe==2.0.1
 packaging==21.0
 pep517==0.11.0
 pyparsing==2.4.7
 tomli==1.2.1
-./lib/yearsinpixels_business-0.0.1-py3-none-any.whl
+Werkzeug==2.0.2
+yearsinpixels-business @ file:///Users/danielgran/Projects/yearsinpixels_api/lib/yearsinpixels_business-0.0.1-py3-none-any.whl
