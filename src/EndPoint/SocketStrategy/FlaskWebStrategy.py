@@ -1,13 +1,14 @@
 from flask import Flask, request
 
 from src.EndPoint.SocketStrategy.WebStrategy import WebStrategy
+from src.Request.RawRequest import RawRequest
 
 
 class FlaskWebStrategy(WebStrategy):
 
     request_callback = None
     flask_app = None
-    is_running = False
+    running = False
 
 
     def __init__(self):
@@ -15,24 +16,20 @@ class FlaskWebStrategy(WebStrategy):
 
 
     def is_running(self):
-        return self.is_running
+        return self.running
 
 
     def setup_service(self, request_callback):
         self.request_callback = request_callback
-        self.flask_app.add_url_rule("/", view_func=self.catch_all_route, defaults={'path': ''})
+        self.flask_app.add_url_rule("/", view_func=self.catch_all_route , defaults={'path': ''})
         self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_all_route)
 
 
     def run(self):
+        self.running = True
         self.flask_app.run(host="localhost", port=8080)
 
 
     def catch_all_route(self, path):
-        request_path = path
-
-        self.request_callback(None)
-
-
-        return request_path
-
+        backend_request = RawRequest(request.path)
+        return self.request_callback(backend_request)

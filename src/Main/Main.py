@@ -14,6 +14,7 @@ def main():
     expose_strat.setup_service(tmp)
 
     webhost.setup_expose_strategy(expose_strat)
+    webhost.run()
 
 
 def tmp():
