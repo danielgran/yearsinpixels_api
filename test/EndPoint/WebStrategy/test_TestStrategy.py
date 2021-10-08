@@ -8,6 +8,7 @@ class Utility:
     @staticmethod
     def create_test_strategy():
         strategy = ConcreteTestStrategy()
+        strategy.isrunning = True
         return strategy
 
     @staticmethod
@@ -38,7 +39,7 @@ class TestStrategies(unittest.TestCase):
     def test_callbackfunction(self):
         strategy = Utility.create_test_strategy()
         callback_test_object = Utility.create_callback()
-        strategy.open_service(callback_test_object.callback)
+        strategy.setup_service(callback_test_object.callback)
         strategy.simulate_request("/doesalsonotmatter", "doesntmatter", "doesntmatter")
 
         self.assertTrue(callback_test_object.success)
@@ -46,14 +47,14 @@ class TestStrategies(unittest.TestCase):
     def test_service_status(self):
         strategy = Utility.create_test_strategy()
         callback_test_object = Utility.create_callback()
-        strategy.open_service(callback_test_object.callback)
+        strategy.setup_service(callback_test_object.callback)
 
         self.assertTrue(strategy.is_running())
 
     def test_simulate_request(self):
         strategy = Utility.create_test_strategy()
         callback_test_object = Utility.create_callback()
-        strategy.open_service(callback_test_object.callback)
+        strategy.setup_service(callback_test_object.callback)
 
         strategy.simulate_request("/examplepath", "headertest", "bodytest")
 

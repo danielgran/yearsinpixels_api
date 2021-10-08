@@ -6,7 +6,11 @@ class WebStrategy(ABC):
     request_callback = None
 
     @abstractmethod
-    def open_service(self, request_callback):
+    def setup_service(self, request_callback):
+        pass
+
+    @abstractmethod
+    def run(self):
         pass
 
     @abstractmethod

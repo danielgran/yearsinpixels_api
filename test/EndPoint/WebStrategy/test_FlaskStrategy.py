@@ -17,7 +17,7 @@ class TestFlaskStrategy(unittest.TestCase):
     def test_open_service(self):
         fws = FlaskWebStrategy()
         fws.setup_service(None)
-        self.assertIsNotNone(fws.open_service)
+        self.assertIsNotNone(fws.run)
 
 
 

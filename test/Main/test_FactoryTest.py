@@ -17,5 +17,5 @@ class FactoryTest(unittest.TestCase):
 
     def test_create_factory(self):
         factory = FactoryUtility.create_factory()
-        self.assertTrue(factory)
+        self.assertIsNotNone(factory)
 

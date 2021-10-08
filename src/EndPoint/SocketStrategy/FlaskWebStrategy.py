@@ -24,7 +24,7 @@ class FlaskWebStrategy(WebStrategy):
         self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_all_route)
 
 
-    def open_service(self):
+    def run(self):
         self.flask_app.run(host="localhost", port=8080)
 
 

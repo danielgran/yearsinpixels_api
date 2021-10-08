@@ -9,9 +9,11 @@ class ConcreteTestStrategy(WebStrategy):
     def is_running(self):
         return self.isrunning
 
-    def open_service(self, request_callback):
-        self.isrunning = True
+    def setup_service(self, request_callback):
         self.callback = request_callback
+
+    def run(self):
+        self.isrunning = True
 
     def simulate_request(self, path, header, body):
         if self.callback:

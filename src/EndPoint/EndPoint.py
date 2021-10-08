@@ -8,7 +8,6 @@ class EndPoint:
 
     def __init__(self, path):
         self.path = path
-
     pass
 
     def process_request(self, request):

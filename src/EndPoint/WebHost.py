@@ -12,7 +12,11 @@ class WebHost:
 
     def setup_expose_strategy(self, strategy):
         self.exposeStrategy = strategy
-        strategy.open_service(self.handle_request)
+        self.exposeStrategy.setup_service(self.handle_request)
+
+    def run(self):
+        self.exposeStrategy.run()
+
 
     def add_endpoint(self, endpoint):
         self.endpoints[endpoint.path] = endpoint

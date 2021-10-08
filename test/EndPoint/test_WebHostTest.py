@@ -61,11 +61,19 @@ class TestWebHost(unittest.TestCase):
         self.assertTrue(len(webhost.endpoints) == 0, 'Endpoint did not get removed');
         webhost.remove_endpoint("/thisEndpointDoesNotExist")
 
-    def test_expose_webserver(self):
+    def test_setup_expose_strategy(self):
         webhost = WebHostUtility.create_webhost()
         testStrategy = ConcreteTestStrategy()
         webhost.setup_expose_strategy(testStrategy)
         self.assertTrue(webhost.exposeStrategy, "Webhost does not have an exposeStrategy")
+
+    def test_run_host(self):
+        webhost = WebHostUtility.create_webhost()
+        testStrategy = ConcreteTestStrategy()
+        webhost.setup_expose_strategy(testStrategy)
+        webhost.run()
+
+
 
     def test_handle_request(self):
         webhost = WebHostUtility.create_webhost()
