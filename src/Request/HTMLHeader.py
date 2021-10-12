@@ -1,12 +1,11 @@
 class HTMLHeader:
-
-    items = None
-
-    def __init__(self, dict={}):
-        self.items = dict
+    def __init__(self, dictionary=None):
+        if dictionary is None:
+            dictionary = dict()
+        self.items = dictionary
 
     def add_item(self, item):
-        if self.items.get(item[0]):
+        if item[0] in self.items.keys():
             raise Exception("Header key already exists.")
         self.items[item[0]] = item[1]
 
