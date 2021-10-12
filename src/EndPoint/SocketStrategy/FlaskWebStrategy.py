@@ -1,6 +1,7 @@
 from flask import Flask, request
 
 from src.EndPoint.SocketStrategy.WebStrategy import WebStrategy
+from src.Request.HTMLHeader import HTMLHeader
 from src.Request.RawRequest import RawRequest
 
 
@@ -32,4 +33,7 @@ class FlaskWebStrategy(WebStrategy):
 
     def catch_all_route(self, path):
         backend_request = RawRequest(request.path)
+
+        backend_request.header = HTMLHeader(dict(request.headers))
+
         return self.request_callback(backend_request)
