@@ -3,7 +3,8 @@ from abc import ABC, abstractmethod
 
 class WebStrategy(ABC):
 
-    request_callback = None
+    def __init__(self):
+        self.request_callback = None
 
     @abstractmethod
     def setup_service(self, request_callback):

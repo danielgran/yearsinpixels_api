@@ -17,4 +17,3 @@ class TestWebStrategy(unittest.TestCase):
 
     def test_is_there_a_is_running(self):
         self.assertIsNotNone(WebStrategy.is_running)
-
