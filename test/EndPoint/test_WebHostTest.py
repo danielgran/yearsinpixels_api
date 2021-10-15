@@ -86,6 +86,3 @@ class TestWebHost(unittest.TestCase):
 
         request.path = "/thisshouldnotwork"
         self.assertRaises(Exception, webhost.handle_request, request)
-
-
-
