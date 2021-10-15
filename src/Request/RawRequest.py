@@ -1,11 +1,5 @@
 class RawRequest:
-
-    header = {}
-    body = ""
-    path = ""
-
-    def __init__(self, path):
+    def __init__(self, path=None):
         self.path = path
-
-
-    pass
+        self.header = {}
+        self.body = ""
