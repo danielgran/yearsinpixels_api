@@ -1,4 +1,5 @@
 import unittest
+import uuid
 
 from src.EndPoint.EndPoint import EndPoint
 from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
@@ -73,14 +74,15 @@ class TestWebHost(unittest.TestCase):
         webhost.setup_expose_strategy(testStrategy)
         webhost.run()
 
-
-
     def test_handle_request(self):
         webhost = WebHostUtility.create_webhost()
         teststrategy = ConcreteTestStrategy()
         webhost.setup_expose_strategy(teststrategy)
         request = RawRequest("/examplepath")
-        webhost.handle_request(request)
+        guid = webhost.handle_request(request)
+
+        self.assertEqual(type(guid), type("some_string"))
+
 
         request.path = "/thisshouldnotwork"
         self.assertRaises(Exception, webhost.handle_request, request)
