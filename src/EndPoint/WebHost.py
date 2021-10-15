@@ -4,11 +4,10 @@ from src.EndPoint.EndPoint import EndPoint
 
 class WebHost:
 
-    endpoints = {}
-    exposeStrategy = None
-
     def __init__(self, host):
         self.host = host
+        self.endpoints = {}
+        self.exposeStrategy = None
 
     def setup_expose_strategy(self, strategy):
         self.exposeStrategy = strategy
@@ -27,7 +26,7 @@ class WebHost:
 
     def handle_request(self, request):
         if self.endpoints.get(request.path):
-            self.endpoints.get(request.path).process_request(request)
+            return self.endpoints.get(request.path).process_request(request)
         else:
             raise Exception(f"No Endpoint with the responsiblilty '{request.path}'")
 

@@ -31,9 +31,9 @@ class FlaskWebStrategy(WebStrategy):
         self.flask_app.run(host="localhost", port=8080)
 
 
-    def catch_all_route(self, path):
+    async def catch_all_route(self, path):
         backend_request = RawRequest(request.path)
 
         backend_request.header = HTMLHeader(dict(request.headers))
 
-        return self.request_callback(backend_request)
+        req_guid =  self.request_callback(backend_request)

@@ -1,4 +1,5 @@
 import unittest
+import uuid
 
 from src.EndPoint.EndPoint import EndPoint
 from src.Request.RawRequest import RawRequest
@@ -33,7 +34,9 @@ class TestEndpoint(unittest.TestCase):
 
         request_queue = RequestQueue()
         endpoint.set_request_queue(request_queue)
-        endpoint.process_request(request)
+        guid = endpoint.process_request(request)
+
+        self.assertEqual(type(guid), type("some_string"))
 
         self.assertEqual(endpoint.get_no_open_requests(), 1, msg="Should be 1")
 
