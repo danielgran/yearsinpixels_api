@@ -2,13 +2,10 @@ import time
 
 
 class EndPoint:
-
-    creation = time.time()
-    request_queue = None
-
     def __init__(self, path):
+        self.creation = time.time()
+        self.request_queue = None
         self.path = path
-    pass
 
     def process_request(self, request):
         if self.request_queue is None:
@@ -20,10 +17,9 @@ class EndPoint:
         self.request_queue = request_queue
 
     def has_request_queue(self):
-        if self.request_queue is not None:
-            return True
-        else:
+        if self.request_queue is None:
             return False
+        return True
 
     def get_no_open_requests(self) :
         return len(self.request_queue)
