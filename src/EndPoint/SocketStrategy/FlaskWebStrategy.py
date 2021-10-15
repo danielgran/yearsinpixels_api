@@ -7,12 +7,10 @@ from src.Request.RawRequest import RawRequest
 
 class FlaskWebStrategy(WebStrategy):
 
-    request_callback = None
-    flask_app = None
-    running = False
-
-
     def __init__(self):
+        self.request_callback = None
+        self.flask_app = None
+        self.running = False
         self.flask_app = Flask("yip_backend")
 
 
