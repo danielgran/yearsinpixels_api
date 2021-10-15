@@ -1,4 +1,2 @@
 class AriadneStrategy:
-
     pass
-

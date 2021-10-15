@@ -4,9 +4,5 @@ from src.RequestProcessor.GraphQLDataProcessorStrategy.AriadneStrategy import Ar
 
 
 class test_AriadneStrategy(unittest.TestCase):
-
     def test_is_there(self):
         self.assertIsNotNone(AriadneStrategy)
-
-
-
