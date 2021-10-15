@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 
 from src.EndPoint.SocketStrategy.FlaskWebStrategy import FlaskWebStrategy
 
@@ -18,6 +17,3 @@ class TestFlaskStrategy(unittest.TestCase):
         fws = FlaskWebStrategy()
         fws.setup_service(None)
         self.assertIsNotNone(fws.run)
-
-
-
