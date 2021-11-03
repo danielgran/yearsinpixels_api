@@ -1,7 +1,7 @@
 from src.Request.HTMLHeader import HTMLHeader
 
 
-class RawRequest:
+class Request:
     def __init__(self, path=None):
 
         if path is None:

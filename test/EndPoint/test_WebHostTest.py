@@ -3,7 +3,7 @@ import unittest
 from src.EndPoint.EndPoint import EndPoint
 from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 from src.EndPoint.WebHost import WebHost
-from src.Request.RawRequest import RawRequest
+from src.Request.Request import Request
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -67,7 +67,7 @@ class TestWebHost(unittest.TestCase):
 
     def test_handle_request(self):
         WebHostUtility.setup_webhost_test_strategy(self.webhost)
-        request = RawRequest("/examplepath")
+        request = Request("/examplepath")
         guid = self.webhost.handle_request(request)
 
         self.assertIsNotNone(guid)

@@ -1,7 +1,7 @@
 import unittest
 
 from src.EndPoint.EndPoint import EndPoint
-from src.Request.RawRequest import RawRequest
+from src.Request.Request import Request
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -22,7 +22,7 @@ class TestEndpoint(unittest.TestCase):
         self.assertTrue(self.endpoint.has_request_queue())
 
     def test_process_request(self):
-        request = RawRequest("/examplepath")
+        request = Request("/examplepath")
 
         self.assertRaises(Exception, self.endpoint.process_request, request)
 
@@ -39,6 +39,6 @@ class TestEndpoint(unittest.TestCase):
 
         iterations = 213
         for i in range(iterations):
-            self.endpoint.process_request(RawRequest(f"/{i}"))
+            self.endpoint.process_request(Request(f"/{i}"))
 
         self.assertEqual(self.endpoint.get_no_open_requests(), iterations)

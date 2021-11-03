@@ -1,17 +1,17 @@
 import unittest
 
-from src.Request.RawRequest import RawRequest
+from src.Request.Request import Request
 
 
 class RequestTest(unittest.TestCase):
     def setUp(self):
-        self.request = RawRequest("/examplepath")
+        self.request = Request("/examplepath")
 
     def test_is_there(self):
         self.assertTrue(self.request)
 
     def test_creation(self):
-        self.assertRaises(Exception, RawRequest, None)
+        self.assertRaises(Exception, Request, None)
 
     def test_metadata(self):
         self.assertIsNotNone(self.request.path)

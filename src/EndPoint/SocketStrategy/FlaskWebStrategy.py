@@ -2,7 +2,7 @@ from flask import Flask, request
 
 from src.EndPoint.SocketStrategy.WebStrategy import WebStrategy
 from src.Request.HTMLHeader import HTMLHeader
-from src.Request.RawRequest import RawRequest
+from src.Request.Request import Request
 
 
 class FlaskWebStrategy(WebStrategy):
@@ -26,7 +26,7 @@ class FlaskWebStrategy(WebStrategy):
         self.flask_app.run(host="localhost", port=8080)
 
     async def catch_all_route(self, path):
-        backend_request = RawRequest(request.path)
+        backend_request = Request(request.path)
 
         backend_request.body = request.authorization
         backend_request.header = HTMLHeader(dict(request.headers))

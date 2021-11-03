@@ -1,13 +1,13 @@
 import unittest
 
-from src.Request.RawRequest import RawRequest
+from src.Request.Request import Request
 from src.Request.Response import Response
 
 
 class ResponseTest(unittest.TestCase):
 
     def setUp(self):
-        self.response = Response(RawRequest("/example"))
+        self.response = Response(Request("/example"))
 
     def test_is_there(self):
         self.assertIsNotNone(self.response)

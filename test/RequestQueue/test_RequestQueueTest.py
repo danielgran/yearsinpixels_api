@@ -1,6 +1,6 @@
 import unittest
 
-from src.Request.RawRequest import RawRequest
+from src.Request.Request import Request
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -12,5 +12,5 @@ class RequestQueueTest(unittest.TestCase):
         self.assertIsNotNone(self.requestQueue)
 
     def test_add_ingoing_request(self):
-        id = self.requestQueue.add_incoming_request(RawRequest("/examplepath"))
+        id = self.requestQueue.add_incoming_request(Request("/examplepath"))
         self.assertIsNotNone(id)
