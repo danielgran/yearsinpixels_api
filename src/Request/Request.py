@@ -12,5 +12,3 @@ class Request:
         self.header = HTMLHeader()
         self.request_cookies = dict()
         self.arguments = dict()
-
-        
