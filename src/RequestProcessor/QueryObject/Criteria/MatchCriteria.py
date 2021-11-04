@@ -6,4 +6,4 @@ class MatchCriteria(Criteria):
         super(MatchCriteria, self).__init__(field, value)
 
     def generate_SQL(self):
-        return "das_ist_noch_kein_sql"
+        return f"{self.field} = {self.value}";

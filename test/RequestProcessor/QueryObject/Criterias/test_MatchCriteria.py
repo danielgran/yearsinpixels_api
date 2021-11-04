@@ -1,5 +1,7 @@
 import unittest
 
+from Entity.User import User
+
 from src.RequestProcessor.QueryObject.Criteria.MatchCriteria import MatchCriteria
 
 
@@ -14,3 +16,9 @@ class MatchCriteriaTest(unittest.TestCase):
     def test_generate_sql(self):
         sql = self.criteria.generate_SQL()
         self.assertTrue(isinstance(sql, str))
+
+        entclass = User()
+        entclass = str(entclass.__class__)
+
+
+        entclass = entclass
