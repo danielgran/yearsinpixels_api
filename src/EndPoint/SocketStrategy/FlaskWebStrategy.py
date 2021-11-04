@@ -33,6 +33,6 @@ class FlaskWebStrategy(WebStrategy):
         backend_request.request_cookies = request.cookies.to_dict()
         backend_request.arguments = request.args.to_dict()
 
-        req_guid =  await self.request_callback(backend_request)
+        req_guid = self.request_callback(backend_request)
 
         return req_guid
