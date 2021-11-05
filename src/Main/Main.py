@@ -12,11 +12,13 @@ def main():
 
 def setup_webhost(webhost):
     expose_strategy = FlaskWebStrategy()
-    request_queue = RequestQueue()
+    data_request_queue = RequestQueue()
     webhost.setup_expose_strategy(expose_strategy)
 
     test_endpoint = EndPoint("/test")
-    test_endpoint.set_request_queue(request_queue=request_queue)
+    test_endpoint.set_request_queue(request_queue=data_request_queue)
+    # here i should be able to add the requestprocessor
+
     webhost.add_endpoint(test_endpoint)
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ from src.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 
 class GraphQLProcessor(DataProcessor):
 
-    def process(self):
+    def process(self, request):
         # temporary
         html = PLAYGROUND_HTML
         return html
