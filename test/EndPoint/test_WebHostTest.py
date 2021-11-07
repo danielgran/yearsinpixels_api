@@ -4,6 +4,8 @@ from src.EndPoint.EndPoint import EndPoint
 from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 from src.EndPoint.WebHost import WebHost
 from src.Request.Request import Request
+from src.Request.Response import Response
+from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -14,6 +16,8 @@ class WebHostUtility:
         webhost = WebHost(hostname)
         endpoint = EndPoint("/examplepath")
         request_queue = RequestQueue()
+        test_processor = GraphQLProcessor()
+        request_queue.reqister_processor("/examplepath", test_processor)
         endpoint.set_request_queue(request_queue)
         webhost.add_endpoint(endpoint)
         return webhost
@@ -70,7 +74,9 @@ class TestWebHost(unittest.TestCase):
         request = Request("/examplepath")
         guid = self.webhost.handle_request(request)
 
-        self.assertIsNotNone(guid)
+
+        self.assertTrue(isinstance(guid, str))
+
 
         request.path = "/thisshouldnotwork"
         self.assertRaises(Exception, self.webhost.handle_request, request)

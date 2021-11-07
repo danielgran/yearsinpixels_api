@@ -29,6 +29,7 @@ class WebHost:
 
     def handle_request(self, request):
         if self.endpoints.get(request.path):
-            return self.endpoints.get(request.path).process_request(request)
+            response = self.endpoints.get(request.path).process_request(request)
+            return str(response)
         else:
             raise Exception(f"No Endpoint with the responsiblilty '{request.path}'")

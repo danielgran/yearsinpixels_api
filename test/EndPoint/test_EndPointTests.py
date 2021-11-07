@@ -2,6 +2,8 @@ import unittest
 
 from src.EndPoint.EndPoint import EndPoint
 from src.Request.Request import Request
+from src.Request.Response import Response
+from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from src.RequestQueue.RequestQueue import RequestQueue
 
 
@@ -27,10 +29,16 @@ class TestEndpoint(unittest.TestCase):
         self.assertRaises(Exception, self.endpoint.process_request, request)
 
         request_queue = RequestQueue()
-        self.endpoint.set_request_queue(request_queue)
-        guid = self.endpoint.process_request(request)
 
-        self.assertEqual(type(guid), type("some_string"))
+        test_processor = GraphQLProcessor()
+        request_queue.reqister_processor("/examplepath", test_processor)
+
+        self.endpoint.set_request_queue(request_queue)
+
+        response = self.endpoint.process_request(request)
+
+
+        self.assertTrue(isinstance(response, Response))
         self.assertEqual(self.endpoint.get_no_open_requests(), 1)
 
     def test_no_open_request(self):

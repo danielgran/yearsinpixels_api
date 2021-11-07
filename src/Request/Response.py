@@ -6,3 +6,6 @@ class Response:
     @property
     def request(self):
         return self._request
+
+    def __repr__(self):
+        return self.body

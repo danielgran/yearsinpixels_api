@@ -11,7 +11,11 @@ class EndPoint:
         if self.request_queue is None:
             raise Exception("No request queue found.")
         else:
-            return self.request_queue.add_incoming_request(request)
+            request_id = self.request_queue.add_incoming_request(request)
+            response = self.request_queue.get_response(request_id)
+            return response
+
+
 
     def set_request_queue(self, request_queue):
         self.request_queue = request_queue
