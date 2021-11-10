@@ -8,6 +8,7 @@ from src.Request.Request import Request
 class FlaskWebStrategy(WebStrategy):
 
     def __init__(self):
+        # The request callback is the method processed further by the webhost. Flask Strategy just handles getting the data
         self.request_callback = None
         self.flask_app = None
         self.running = False
@@ -24,6 +25,7 @@ class FlaskWebStrategy(WebStrategy):
     def run(self):
         self.running = True
         self.flask_app.run(host="localhost", port=8080)
+
 
     async def catch_all_route(self, path):
         backend_request = Request(request.path)
