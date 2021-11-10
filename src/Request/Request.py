@@ -1,6 +1,3 @@
-from src.Request.HTMLHeader import HTMLHeader
-
-
 class Request:
     def __init__(self, path=None):
 
@@ -9,6 +6,6 @@ class Request:
         else:
             self.path = path
 
-        self.header = HTMLHeader()
+        self.header = dict()
         self.request_cookies = dict()
         self.arguments = dict()
