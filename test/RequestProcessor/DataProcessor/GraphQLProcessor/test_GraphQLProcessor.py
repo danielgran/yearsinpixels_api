@@ -19,7 +19,6 @@ class GraphQLProcessorTest(unittest.TestCase):
         self.assertTrue(graphql_processor.query)
         self.assertTrue(graphql_processor.mutation)
 
-    @unittest.skip
     def test_proper_process(self):
         graphql_processor = GraphQLProcessor()
         response = graphql_processor.process(Request("Test"))
