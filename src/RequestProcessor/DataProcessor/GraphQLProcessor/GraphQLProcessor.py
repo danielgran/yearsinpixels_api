@@ -17,7 +17,7 @@ class GraphQLProcessor(DataProcessor):
         self.mutation.set_field("register", register_user)
 
         self.schema = make_executable_schema(
-            load_schema_from_path("../RequestProcessor/DataProcessor/GraphQLProcessor/schema.graphql")
+            load_schema_from_path(r"schema.graphql")
         )
 
     def process(self, request):
