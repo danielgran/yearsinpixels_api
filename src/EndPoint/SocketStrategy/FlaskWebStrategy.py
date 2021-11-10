@@ -28,7 +28,7 @@ class FlaskWebStrategy(WebStrategy):
     async def catch_all_route(self, path):
         backend_request = Request(request.path)
 
-        backend_request.body = request.authorization
+        backend_request.body = request.get_json()
         backend_request.header = HTMLHeader(dict(request.headers))
         backend_request.request_cookies = request.cookies.to_dict()
         backend_request.arguments = request.args.to_dict()
