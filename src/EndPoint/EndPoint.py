@@ -15,8 +15,6 @@ class EndPoint:
             response = self.request_queue.get_response(request_id)
             return response
 
-
-
     def set_request_queue(self, request_queue):
         self.request_queue = request_queue
 

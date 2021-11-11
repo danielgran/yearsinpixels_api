@@ -1,6 +1,10 @@
 type Query {
     user: User
-  }
+}
+
+type Mutation {
+    register(email: String!): String
+}
 
 type User {
     id: ID

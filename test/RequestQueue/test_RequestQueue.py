@@ -33,7 +33,11 @@ class RequestQueueTest(unittest.TestCase):
     def test_get_request_response(self):
         g = GraphQLProcessor()
         self.requestQueue.reqister_processor("/examplepath", g)
-        request_id = self.requestQueue.add_incoming_request(Request("/examplepath"))
+
+        request = Request("/examplepath")
+        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
+
+        request_id = self.requestQueue.add_incoming_request(request)
 
         response = self.requestQueue.get_response(request_id)
 

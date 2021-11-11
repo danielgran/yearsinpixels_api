@@ -72,11 +72,8 @@ class TestWebHost(unittest.TestCase):
     def test_handle_request(self):
         WebHostUtility.setup_webhost_test_strategy(self.webhost)
         request = Request("/examplepath")
+        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
         guid = self.webhost.handle_request(request)
-
-
         self.assertTrue(isinstance(guid, str))
-
-
         request.path = "/thisshouldnotwork"
         self.assertRaises(Exception, self.webhost.handle_request, request)

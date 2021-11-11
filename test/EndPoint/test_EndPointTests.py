@@ -25,6 +25,7 @@ class TestEndpoint(unittest.TestCase):
 
     def test_process_request(self):
         request = Request("/examplepath")
+        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
 
         self.assertRaises(Exception, self.endpoint.process_request, request)
 
