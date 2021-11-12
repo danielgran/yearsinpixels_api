@@ -21,8 +21,7 @@ class GraphQLProcessorTest(unittest.TestCase):
 
     def test_proper_process(self):
         graphql_processor = GraphQLProcessor()
-        request = Request("Test")
-        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
+        request = Request("/test")
+        request.body = {'query': 'mutation {\n    register(email: "some.user@mail.de")\n}'}
         response = graphql_processor.process(request)
         self.assertTrue(isinstance(response, Response))
-
