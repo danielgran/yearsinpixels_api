@@ -25,19 +25,15 @@ class TestEndpoint(unittest.TestCase):
 
     def test_process_request(self):
         request = Request("/examplepath")
-        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
+        request.body = {'query': 'mutation {\n    register(email: "mail@grandaniel.com")\n}'}
 
-        self.assertRaises(Exception, self.endpoint.process_request, request)
+        self.assertRaises(Exception, self.endpoint.process_request, request, "The Endpoint should raise an error.")
 
         request_queue = RequestQueue()
-
         test_processor = GraphQLProcessor()
         request_queue.reqister_processor("/examplepath", test_processor)
-
         self.endpoint.set_request_queue(request_queue)
-
         response = self.endpoint.process_request(request)
-
 
         self.assertTrue(isinstance(response, Response))
         self.assertEqual(self.endpoint.get_no_open_requests(), 1)
