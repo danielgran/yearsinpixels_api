@@ -4,7 +4,6 @@ from src.EndPoint.EndPoint import EndPoint
 from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 from src.EndPoint.WebHost import WebHost
 from src.Request.Request import Request
-from src.Request.Response import Response
 from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from src.RequestQueue.RequestQueue import RequestQueue
 
