@@ -49,9 +49,6 @@ class GraphQLProcessor(DataProcessor):
         return_string = str(result)
         response.body = return_string
 
-        users = User.query.all()
-        users = users
-
         return response
 
 # Thats BL
