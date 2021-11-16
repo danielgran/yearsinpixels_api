@@ -17,3 +17,4 @@ tomli==1.2.1
 typing-extensions==3.10.0.2
 Werkzeug==2.0.2
 ./lib/yearsinpixels_business-0.0.1-py3-none-any.whl
+./lib/yearsinpixels_data-0.0.1-py3-none-any.whl
