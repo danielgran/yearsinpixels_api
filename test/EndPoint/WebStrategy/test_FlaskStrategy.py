@@ -1,6 +1,6 @@
 import unittest
 
-from src.EndPoint.SocketStrategy.FlaskWebStrategy import FlaskWebStrategy
+from yearsinpixels_api.EndPoint.SocketStrategy.FlaskWebStrategy import FlaskWebStrategy
 
 
 class TestFlaskStrategy(unittest.TestCase):

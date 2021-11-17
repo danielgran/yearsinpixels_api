@@ -1,6 +1,6 @@
 import unittest
 
-from src.Request.HTMLHeader import HTMLHeader
+from yearsinpixels_api.Request.HTMLHeader import HTMLHeader
 
 
 class test_HTMLHeader(unittest.TestCase):

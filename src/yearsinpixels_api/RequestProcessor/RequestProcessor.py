@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.Request.Response import Response
+from yearsinpixels_api.Request.Response import Response
 
 
 class RequestProcessor(ABC):

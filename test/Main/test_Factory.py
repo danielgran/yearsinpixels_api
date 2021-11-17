@@ -1,6 +1,6 @@
 import unittest
 
-from src.Main.ConcreteFactory import ConcreteFactory
+from yearsinpixels_api.Main.ConcreteFactory import ConcreteFactory
 
 
 class FactoryTest(unittest.TestCase):

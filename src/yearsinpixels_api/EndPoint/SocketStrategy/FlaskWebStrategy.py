@@ -1,8 +1,8 @@
 from flask import Flask, request
 
-from src.EndPoint.SocketStrategy.WebStrategy import WebStrategy
-from src.Request.HTMLHeader import HTMLHeader
-from src.Request.Request import Request
+from yearsinpixels_api.EndPoint.SocketStrategy.WebStrategy import WebStrategy
+from yearsinpixels_api.Request.HTMLHeader import HTMLHeader
+from yearsinpixels_api.Request.Request import Request
 
 
 class FlaskWebStrategy(WebStrategy):

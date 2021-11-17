@@ -1,4 +1,4 @@
-from src.EndPoint.WebHost import WebHost
+from yearsinpixels_api.EndPoint.WebHost import WebHost
 
 
 class ConcreteFactory:

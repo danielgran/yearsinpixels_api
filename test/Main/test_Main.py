@@ -1,6 +1,6 @@
 import unittest
 
-from src.Main import Main
+from yearsinpixels_api.Main import Main
 
 
 class MainTest(unittest.TestCase):

@@ -8,6 +8,8 @@ greenlet==1.1.2
 itsdangerous==2.0.1
 Jinja2==3.0.2
 MarkupSafe==2.0.1
+mysql==0.0.3
+mysqlclient==2.0.3
 packaging==21.0
 pep517==0.11.0
 pyparsing==2.4.7

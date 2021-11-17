@@ -1,6 +1,6 @@
 import unittest
 
-from src.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
+from yearsinpixels_api.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
 
 
 class Utility:

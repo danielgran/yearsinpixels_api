@@ -1,9 +1,9 @@
 import unittest
 
-from src.Request.Request import Request
-from src.Request.Response import Response
-from src.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
-from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_api.Request.Request import Request
+from yearsinpixels_api.Request.Response import Response
+from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
+from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 
 
 class GraphQLProcessorTest(unittest.TestCase):

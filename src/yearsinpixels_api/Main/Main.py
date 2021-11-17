@@ -1,8 +1,8 @@
-from src.EndPoint.EndPoint import EndPoint
-from src.EndPoint.SocketStrategy.FlaskWebStrategy import FlaskWebStrategy
-from src.Main.ConcreteFactory import ConcreteFactory
-from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
-from src.RequestQueue.RequestQueue import RequestQueue
+from yearsinpixels_api.EndPoint.EndPoint import EndPoint
+from yearsinpixels_api.EndPoint.SocketStrategy.FlaskWebStrategy import FlaskWebStrategy
+from yearsinpixels_api.Main.ConcreteFactory import ConcreteFactory
+from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_api.RequestQueue.RequestQueue import RequestQueue
 
 
 def main():

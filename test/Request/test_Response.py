@@ -1,7 +1,7 @@
 import unittest
 
-from src.Request.Request import Request
-from src.Request.Response import Response
+from yearsinpixels_api.Request.Request import Request
+from yearsinpixels_api.Request.Response import Response
 
 
 class ResponseTest(unittest.TestCase):

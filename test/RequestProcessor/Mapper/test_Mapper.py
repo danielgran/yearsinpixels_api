@@ -1,6 +1,6 @@
 import unittest
 
-from src.RequestProcessor.Mapper.Mapper import Mapper
+from yearsinpixels_api.RequestProcessor.Mapper.Mapper import Mapper
 
 
 class MapperTest(unittest.TestCase):

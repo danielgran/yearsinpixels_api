@@ -1,7 +1,7 @@
 import inspect
 import unittest
 
-from src.EndPoint.SocketStrategy.WebStrategy import WebStrategy
+from yearsinpixels_api.EndPoint.SocketStrategy.WebStrategy import WebStrategy
 
 
 class TestWebStrategy(unittest.TestCase):

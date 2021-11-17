@@ -1,10 +1,10 @@
 import unittest
 
-from src.EndPoint.EndPoint import EndPoint
-from src.Request.Request import Request
-from src.Request.Response import Response
-from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
-from src.RequestQueue.RequestQueue import RequestQueue
+from yearsinpixels_api.EndPoint.EndPoint import EndPoint
+from yearsinpixels_api.Request.Request import Request
+from yearsinpixels_api.Request.Response import Response
+from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_api.RequestQueue.RequestQueue import RequestQueue
 
 
 class TestEndpoint(unittest.TestCase):

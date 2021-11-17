@@ -1,6 +1,6 @@
 import unittest
 
-from src.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
+from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 
 
 class DataProcessorTest(unittest.TestCase):

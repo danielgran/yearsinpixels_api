@@ -1,6 +1,6 @@
 import unittest
 
-from src.RequestProcessor.RequestProcessor import RequestProcessor
+from yearsinpixels_api.RequestProcessor.RequestProcessor import RequestProcessor
 
 
 class TestRequestProcessor(unittest.TestCase):

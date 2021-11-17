@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import MagicMock
 
-from src.Request.Request import Request
-from src.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
-from src.RequestQueue.RequestQueue import RequestQueue
+from yearsinpixels_api.Request.Request import Request
+from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_api.RequestQueue.RequestQueue import RequestQueue
 
 
 class RequestQueueTest(unittest.TestCase):

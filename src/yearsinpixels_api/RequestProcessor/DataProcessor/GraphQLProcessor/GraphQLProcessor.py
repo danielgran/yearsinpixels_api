@@ -5,8 +5,8 @@ from flask import Flask, _app_ctx_stack
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 
-from src.Request.Response import Response
-from src.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
+from yearsinpixels_api.Request.Response import Response
+from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 
 engine = create_engine("mysql://root:somepass@127.0.0.1/yearsinpixels")
 

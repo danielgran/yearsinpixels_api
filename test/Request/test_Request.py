@@ -1,6 +1,6 @@
 import unittest
 
-from src.Request.Request import Request
+from yearsinpixels_api.Request.Request import Request
 
 
 class RequestTest(unittest.TestCase):
