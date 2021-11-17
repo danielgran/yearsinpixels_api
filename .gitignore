@@ -1,5 +1,7 @@
 .idea
 !/.idea/runConfigurations
+
+/build
 /dist
 /venv
 yearsinpixels_api.egg-info
