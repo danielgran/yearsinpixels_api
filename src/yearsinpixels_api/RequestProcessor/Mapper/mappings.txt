@@ -1,2 +1,0 @@
-user Entity.User.User
-user.email Entity.User.email
