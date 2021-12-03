@@ -8,14 +8,13 @@ from sqlalchemy.orm import declarative_base, sessionmaker, scoped_session
 from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 
+
 engine = create_engine("mysql://root:somepass@127.0.0.1/yearsinpixels")
-
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
-
 app = Flask(__name__)
 app.session = scoped_session(SessionLocal, scopefunc=_app_ctx_stack.__ident_func__)
+
 
 class GraphQLProcessor(DataProcessor):
 
@@ -33,9 +32,6 @@ class GraphQLProcessor(DataProcessor):
         )
         users = app.session.query(User).all()
 
-        users = users
-
-
 
     def process(self, request):
         response = Response(request)
@@ -51,11 +47,13 @@ class GraphQLProcessor(DataProcessor):
 
         return response
 
+
 # Thats BL
 def register_user(obj, info, email):
     return {
         "success": True
     }
+
 
 def get_users(obj):
     pass
