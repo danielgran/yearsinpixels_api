@@ -3,8 +3,6 @@ from unittest.mock import MagicMock
 
 from yearsinpixels_api.EndPoint.EndPoint import EndPoint
 from yearsinpixels_api.Request.Request import Request
-from yearsinpixels_api.Request.Response import Response
-from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from yearsinpixels_api.RequestQueue.RequestQueue import RequestQueue
 
 
