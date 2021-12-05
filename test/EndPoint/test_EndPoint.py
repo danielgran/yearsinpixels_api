@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import MagicMock
 
 from yearsinpixels_api.EndPoint.EndPoint import EndPoint
 from yearsinpixels_api.Request.Request import Request
@@ -23,20 +24,20 @@ class TestEndpoint(unittest.TestCase):
         self.endpoint.set_request_queue(RequestQueue())
         self.assertTrue(self.endpoint.has_request_queue())
 
-    def test_process_request(self):
+    def test_failsafe_process_request(self):
         request = Request("/examplepath")
-        request.body = {'query': 'mutation {\n    register(email: "mail@grandaniel.com")\n}'}
-
         self.assertRaises(Exception, self.endpoint.process_request, request, "The Endpoint should raise an error.")
 
+    def test_process_request(self):
+        request = Request("/examplepath")
         request_queue = RequestQueue()
-        test_processor = GraphQLProcessor()
-        request_queue.reqister_processor("/examplepath", test_processor)
-        self.endpoint.set_request_queue(request_queue)
-        response = self.endpoint.process_request(request)
 
-        self.assertTrue(isinstance(response, Response))
-        self.assertEqual(self.endpoint.get_no_open_requests(), 1)
+        request_queue.get_response = MagicMock()
+        self.endpoint.set_request_queue(request_queue)
+
+        self.endpoint.process_request(request)
+
+        self.assertTrue(request_queue.get_response.called)
 
     def test_no_open_request(self):
         request_queue = RequestQueue()
