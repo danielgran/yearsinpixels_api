@@ -3,7 +3,6 @@ import unittest
 from yearsinpixels_data.Gateway.TestGateway import TestGateway
 
 from yearsinpixels_business.Entity.User import User
-from yearsinpixels_data.Gateway.MySQLGateway import MySQLGateway
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from yearsinpixels_data.Mapper.UserMapper import UserMapper
