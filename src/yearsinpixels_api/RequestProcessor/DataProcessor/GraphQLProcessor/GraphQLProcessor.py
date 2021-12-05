@@ -53,6 +53,7 @@ class GraphQLProcessor(DataProcessor):
 def resolve_strr(obj, info):
     return "IT WORKS"
 
+
 def register_user(ob, info, email, password):
     return {
         "success": True
