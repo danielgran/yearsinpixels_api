@@ -35,8 +35,7 @@ class RequestQueueTest(unittest.TestCase):
         graphql_processor = GraphQLProcessor()
         self.requestQueue.reqister_processor("/examplepath", graphql_processor)
         request = Request("/examplepath")
-        # mock
-        graphql_processor.process = MagicMock(return_value = "Edsger Dijkstra")
+        graphql_processor.process = MagicMock(return_value="Edsger Dijkstra")
 
         request_id = self.requestQueue.add_incoming_request(request)
         response = self.requestQueue.get_response(request_id)
