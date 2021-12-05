@@ -5,17 +5,20 @@ from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schem
 from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 from yearsinpixels_business.Entity.User import User
+from yearsinpixels_data.QueryObject.Criteria.Criteria import Criteria
 
 
 class GraphQLProcessor(DataProcessor):
 
     def __init__(self):
-        self.resolvers = dict()
-
+        self.mappers = dict()
         self.query = ObjectType("Query")
+        self.query.set_field("user", self.resolve_user)
+
         self.mutation = ObjectType("Mutation")
-        self.mutation.set_field("register", register_user)
-        self.query.set_field("user", resolve_user)
+        self.mutation.set_field("register", self.register)
+        self.mutation.set_field("login", self.login)
+        self.mutation.set_field("create_day", self.create_day)
 
         path = Path(__file__)
         path = path.parent.resolve()
@@ -46,21 +49,33 @@ class GraphQLProcessor(DataProcessor):
 
         return response
 
-    def add_resolver(self, business_class, resolver):
-        self.resolvers[business_class] = resolver
+    def set_mapper(self, business_class, user_mapper):
+        self.mappers[business_class] = user_mapper
 
 
-def resolve_strr(obj, info):
-    return "IT WORKS"
+    def resolve_user(self, obj, info, guid):
+        user = self.mappers[User].find(Criteria.matches("guid", guid))
+        return user
 
+    def register(self, obj, info, email, password):
+        result = {
+            "success": True,
+            'text': ""
+        }
 
-def register_user(ob, info, email, password):
-    return {
-        "success": True
-    }
+    def login(self, obj, info, email, password):
+        # jwt must contain guid of user
 
+        login_result = {
+            'success': True,
+            'message': '',
+            'jwt': ''
 
-def resolve_user(obj, info, guid):
-    user = User()
-    user.email = "dads"
-    return user
+        }
+
+    def create_day(self, ob, info, day):
+        return {
+            "success": True,
+            'text': ""
+        }
+

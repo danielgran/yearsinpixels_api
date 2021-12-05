@@ -1,9 +1,12 @@
 import unittest
 
-from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
-from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.DataResolver.UserResolver import UserResolver
-from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_data.Gateway.TestGateway import TestGateway
+
 from yearsinpixels_business.Entity.User import User
+from yearsinpixels_data.Gateway.MySQLGateway import MySQLGateway
+from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
+from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_data.Mapper.UserMapper import UserMapper
 
 
 class GraphQLProcessorTest(unittest.TestCase):
@@ -24,10 +27,31 @@ class GraphQLProcessorTest(unittest.TestCase):
     def test_update_schema(self):
         self.graphql_processor.update_schema()
 
-    def test_existent_resolver_list(self):
-        self.assertIsNotNone(self.graphql_processor.resolvers)
+    def test_set_mapper(self):
+        test_gateway = TestGateway()
+        user_mapper = UserMapper(test_gateway)
+        self.graphql_processor.set_mapper(User, user_mapper)
+        self.assertTrue(user_mapper in self.graphql_processor.mappers.values())
 
-    def test_add_resolver(self):
-        user_resolver = UserResolver()
-        self.graphql_processor.add_resolver(User, user_resolver)
-        self.assertTrue(user_resolver in self.graphql_processor.resolvers.values())
+    def test_existent_user_query(self):
+        self.assertIsNotNone('user' in self.graphql_processor.query._resolvers.keys())
+
+    def test_existent_mutation_register(self):
+        self.assertIsNotNone('register' in self.graphql_processor.mutation._resolvers.keys())
+
+    def test_existent_mutation_login(self):
+        self.assertIsNotNone('login' in self.graphql_processor.mutation._resolvers.keys())
+
+    def test_existent_mutation_create_day(self):
+        self.assertIsNotNone('create_day' in self.graphql_processor.mutation._resolvers.keys())
+
+    def test_resolve_user(self):
+        test_gateway = TestGateway()
+        user_mapper = UserMapper(test_gateway)
+        user = User()
+        user_mapper.add(user)
+        self.graphql_processor.set_mapper(User, user_mapper)
+
+        resolved_user = self.graphql_processor.resolve_user(None, None, user.guid)
+
+        self.assertTrue(user == resolved_user)
