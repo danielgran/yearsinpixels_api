@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import MagicMock
 
 from yearsinpixels_api.EndPoint.EndPoint import EndPoint
 from yearsinpixels_api.EndPoint.SocketStrategy.ConcreteTestStrategy import ConcreteTestStrategy
@@ -71,8 +72,13 @@ class TestWebHost(unittest.TestCase):
     def test_handle_request(self):
         WebHostUtility.setup_webhost_test_strategy(self.webhost)
         request = Request("/examplepath")
-        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
-        guid = self.webhost.handle_request(request)
-        self.assertTrue(isinstance(guid, str))
-        request.path = "/thisshouldnotwork"
+
+        self.webhost.endpoints.get(request.path).process_request = MagicMock()
+
+        self.webhost.handle_request(request)
+        self.assertTrue(self.webhost.endpoints.get(request.path).process_request.called)
+
+    def test_handle_request_with_unknown_path(self):
+        WebHostUtility.setup_webhost_test_strategy(self.webhost)
+        request = Request("/examplepath")
         self.assertRaises(Exception, self.webhost.handle_request, request)
