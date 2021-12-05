@@ -3,7 +3,6 @@ import unittest
 from yearsinpixels_api.Request.Request import Request
 from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
-from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.DataResolver.DataResolver import DataResolver
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.DataResolver.UserResolver import UserResolver
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from yearsinpixels_business.Entity.User import User
