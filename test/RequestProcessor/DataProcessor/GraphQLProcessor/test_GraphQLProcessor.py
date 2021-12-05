@@ -1,7 +1,5 @@
 import unittest
 
-from yearsinpixels_api.Request.Request import Request
-from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.DataResolver.UserResolver import UserResolver
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
@@ -33,21 +31,3 @@ class GraphQLProcessorTest(unittest.TestCase):
         user_resolver = UserResolver()
         self.graphql_processor.add_resolver(User, user_resolver)
         self.assertTrue(user_resolver in self.graphql_processor.resolvers.values())
-
-
-
-
-    def test_process_with_test_resolver(self):
-        request = Request("/test")
-        request.body = {'query': 'query { count_on_me }'}
-
-        response = self.graphql_processor.process(request)
-
-        print(response)
-
-    def test_proper_process(self):
-        graphql_processor = GraphQLProcessor()
-        request = Request("/test")
-        request.body = {'query': 'mutation {\n    register(email: "some.user@mail.de")\n}'}
-        response = graphql_processor.process(request)
-        self.assertTrue(isinstance(response, Response))
