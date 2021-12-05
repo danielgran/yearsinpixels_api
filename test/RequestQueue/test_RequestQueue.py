@@ -35,9 +35,10 @@ class RequestQueueTest(unittest.TestCase):
         graphql_processor = GraphQLProcessor()
         self.requestQueue.reqister_processor("/examplepath", graphql_processor)
         request = Request("/examplepath")
-        request.body = {'query': 'mutation {\n    register(email: "daniel.gran")\n}'}
+        # mock
+        graphql_processor.process = MagicMock(return_value = "Edsger Dijkstra")
 
         request_id = self.requestQueue.add_incoming_request(request)
         response = self.requestQueue.get_response(request_id)
 
-        self.assertIsNotNone(response, "Response None after processing")
+        self.assertTrue(response == "Edsger Dijkstra", "Request response was not right.")
