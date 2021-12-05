@@ -15,7 +15,6 @@ class GraphQLProcessor(DataProcessor):
         self.query = ObjectType("Query")
         self.mutation = ObjectType("Mutation")
         self.mutation.set_field("register", register_user)
-        self.query.set_field("count_on_me", resolve_strr)
         self.query.set_field("user", resolve_user)
 
         path = Path(__file__)

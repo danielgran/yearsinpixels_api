@@ -1,16 +1,16 @@
 
 schema {
-    query: Query
-    mutation: Mutation
+    query: Queryy
+    mutation: Mutationn
 }
 
-type Query {
+type Queryy {
     authorize(token: String!): AuthenticationResult
 }
 
-type Mutation {
+type Mutationn {
     register(email: String!): RegisterResult
-    editUser(email: String!): User
+    editUser(email: String!): UserOut
 }
 
 type AuthenticationResult {
@@ -23,7 +23,7 @@ type RegisterResult{
     success: Boolean!
 }
 
-type User {
+type UserOut {
     id: Int
     email: String!
     name_first: String
