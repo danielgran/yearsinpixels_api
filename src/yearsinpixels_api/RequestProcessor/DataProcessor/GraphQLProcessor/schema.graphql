@@ -1,13 +1,76 @@
 type Query {
     user: User
-    strr: String!
 }
 
 type Mutation {
-    register(email: String!): String
+    register(email: String!, password: String!): BoolResult
+    login(email: String!, password: String!): BoolResult
+
+    create_day(day: DayInput!): BoolResult
 }
 
 type User {
-    id: ID
-    username: String!
+    guid: String!
+    email: String!
+    email_verified: Boolean!
+    name_first: String
+    name_last: String
+    password: String
+    enabled: Boolean!
+    password_last_update: Datetime
+    twofatoken: String
+    days: [Day]
+    moods: [Mood]
+}
+
+type Day {
+    date: Date
+    title: String
+    notes: String
+    mood: Mood
+}
+
+input DayInput {
+    date: DateInput
+    title: String
+    notes: String
+    mood: MoodInput
+}
+
+type Mood {
+    title: String
+    color: Int
+}
+
+input MoodInput {
+        title: String
+    color: Int
+}
+
+type Date {
+    year: Int!
+    month: Int!
+    day: Int!
+}
+
+input DateInput {
+    year: Int!
+    month: Int!
+    day: Int!
+}
+
+type Time {
+    hours: Int
+    minutes: Int
+    seconds: Int
+}
+
+type Datetime {
+    date: Date
+    time: Time
+}
+
+type BoolResult {
+    success: Boolean!
+    text: String
 }
