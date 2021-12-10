@@ -1,3 +1,5 @@
+from yearsinpixels_business.Entity.Day import Day
+from yearsinpixels_business.Entity.Mood import Mood
 from yearsinpixels_business.Entity.User import User
 from yearsinpixels_data.Gateway.MySQLGateway import MySQLGateway
 
@@ -6,6 +8,8 @@ from yearsinpixels_api.EndPoint.SocketStrategy.FlaskWebStrategy import FlaskWebS
 from yearsinpixels_api.Main.ConcreteFactory import ConcreteFactory
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from yearsinpixels_api.RequestQueue.RequestQueue import RequestQueue
+from yearsinpixels_data.Mapper.DayMapper import DayMapper
+from yearsinpixels_data.Mapper.MoodMapper import MoodMapper
 from yearsinpixels_data.Mapper.UserMapper import UserMapper
 
 
@@ -25,6 +29,10 @@ def setup_webhost(webhost):
     mysql_gateway.connect()
     user_mapper = UserMapper(mysql_gateway)
     graqh_ql_processor.set_mapper(User, user_mapper)
+    mood_mapper = MoodMapper(mysql_gateway)
+    graqh_ql_processor.set_mapper(Mood, mood_mapper)
+    day_mapper = DayMapper(mysql_gateway)
+    graqh_ql_processor.set_mapper(Day, day_mapper)
 
     data_request_queue.reqister_processor("/test", graqh_ql_processor)
 
