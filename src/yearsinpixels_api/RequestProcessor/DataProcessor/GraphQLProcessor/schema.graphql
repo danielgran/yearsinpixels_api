@@ -1,12 +1,13 @@
 type Query {
-    user(guid: String!): User
+    user(user_guid: String!): User
+    days(user_guid: String!): [Day]
 }
 
 type Mutation {
     register(email: String!, password: String!): BoolResult
     login(email: String!, password: String!): LoginResult
 
-    create_day(day: DayInput!): BoolResult
+    create_day(user_guid: String!, day: DayInput): BoolResult
 }
 
 type User {
@@ -19,30 +20,24 @@ type User {
     enabled: Boolean!
     password_last_update: Datetime
     twofatoken: String
-    days: [Day]
-    moods: [Mood]
 }
 
 type Day {
     date: Date
     title: String
     notes: String
-    mood: Mood
+    mood1: Mood
 }
 
 input DayInput {
-    date: DateInput
-    title: String
+    date: DateInput!
+    id_mood1: Int!
+    title: String!
     notes: String
-    mood: MoodInput
 }
 
 type Mood {
-    title: String
-    color: Int
-}
-
-input MoodInput {
+    id: Int!
     title: String
     color: Int
 }

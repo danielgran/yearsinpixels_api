@@ -1,9 +1,12 @@
+from datetime import date
 from pathlib import Path
 
 from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schema_from_path
 
 from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
+from yearsinpixels_business.Entity.Day import Day
+from yearsinpixels_business.Entity.Mood import Mood
 from yearsinpixels_business.Entity.User import User
 from yearsinpixels_data.QueryObject.Criteria.Criteria import Criteria
 
@@ -14,6 +17,7 @@ class GraphQLProcessor(DataProcessor):
         self.mappers = dict()
         self.query = ObjectType("Query")
         self.query.set_field("user", self.resolve_user)
+        self.query.set_field("days", self.resolve_days)
 
         self.mutation = ObjectType("Mutation")
         self.mutation.set_field("register", self.register)
@@ -53,9 +57,18 @@ class GraphQLProcessor(DataProcessor):
         self.mappers[business_class] = user_mapper
 
 
-    def resolve_user(self, obj, info, guid):
-        user = self.mappers[User].find(Criteria.matches("guid", guid))
+    def resolve_user(self, obj, info, user_guid):
+        user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         return user
+
+    def resolve_days(self, obj, info, user_guid):
+        user_from_database = self.mappers[User].find(Criteria.matches("guid", user_guid))
+        days = self.mappers[Day].find_all_from_user(Criteria.matches("id_user", user_from_database.id))
+        moods = self.mappers[Mood].find_all()
+        for day in days:
+            mood1_for_day = next(mood for mood in moods if day.id_mood1 == mood.id)
+            day.mood1 = mood1_for_day
+        return days
 
     def register(self, obj, info, email, password):
         result = {
@@ -73,7 +86,19 @@ class GraphQLProcessor(DataProcessor):
 
         }
 
-    def create_day(self, ob, info, day):
+    def create_day(self, ob, info, user_guid, day):
+        user = self.mappers[User].find(Criteria.matches("guid", user_guid))
+        date_of_day = date(day['date']['year'], day['date']['month'], day['date']['day'])
+        title = day['title']
+        notes = day['notes']
+        id_mood1 = day['id_mood1']
+        day = Day()
+        day.id_user = user.id
+        day.date = date_of_day
+        day.title = title
+        day.notes = notes
+        day.id_mood1 = id_mood1
+        self.mappers[Day].add(day)
         return {
             "success": True,
             'text': ""
