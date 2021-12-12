@@ -4,7 +4,7 @@ type Query {
 }
 
 type Mutation {
-    register(email: String!, password: String!): BoolResult
+    register_user(email: String!, password: String!): RegisterResult
     login(email: String!, password: String!): LoginResult
 
     create_day(user_guid: String!, day: DayInput): BoolResult
@@ -68,6 +68,12 @@ type Datetime {
 type BoolResult {
     success: Boolean!
     text: String
+}
+
+type RegisterResult {
+    success: Boolean!
+    user_guid: String
+    message: String
 }
 
 type LoginResult {

@@ -1,6 +1,7 @@
 from datetime import date
 from pathlib import Path
 
+from argon2 import PasswordHasher
 from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schema_from_path
 
 from yearsinpixels_api.Request.Response import Response
@@ -20,7 +21,7 @@ class GraphQLProcessor(DataProcessor):
         self.query.set_field("days", self.resolve_days)
 
         self.mutation = ObjectType("Mutation")
-        self.mutation.set_field("register", self.register)
+        self.mutation.set_field("register_user", self.register_user)
         self.mutation.set_field("login", self.login)
         self.mutation.set_field("create_day", self.create_day)
 
@@ -69,10 +70,25 @@ class GraphQLProcessor(DataProcessor):
             day.mood1 = mood1_for_day
         return days
 
-    def register(self, obj, info, email, password):
-        result = {
+    def register_user(self, obj, info, email, password):
+        user = User()
+        user.email = email
+        password_hasher = PasswordHasher()
+        password_hash = password_hasher.hash(password)
+        user.password = password_hash
+
+        try:
+            self.mappers[User].add(user)
+        except:
+            return {
+                "success": False,
+                "message": "Error creating user"
+            }
+
+        return {
             "success": True,
-            'text': ""
+            "message": "",
+            "user_guid": user.guid
         }
 
     def login(self, obj, info, email, password):

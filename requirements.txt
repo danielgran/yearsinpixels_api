@@ -1,3 +1,5 @@
+argon2-cffi==21.3.0
+argon2-cffi-bindings==21.2.0
 ariadne==0.13.0
 asgiref==3.4.1
 Authlib==0.15.5
@@ -26,6 +28,7 @@ starlette==0.14.2
 tomli==1.2.1
 typing-extensions==3.10.0.2
 Werkzeug==2.0.2
+
 
 ./lib/yearsinpixels_business-0.0.1-py3-none-any.whl
 ./lib/yearsinpixels_data-0.0.1-py3-none-any.whl
