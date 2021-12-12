@@ -85,7 +85,7 @@ class GraphQLProcessor(DataProcessor):
 
         }
 
-    def create_day(self, ob, info, user_guid, day):
+    def create_day(self, obj, info, user_guid, day):
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         if user is None:
             return {
