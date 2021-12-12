@@ -88,16 +88,29 @@ class GraphQLProcessor(DataProcessor):
 
     def create_day(self, ob, info, user_guid, day):
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
-        date_of_day = date(day['date']['year'], day['date']['month'], day['date']['day'])
-        title = day['title']
-        notes = day['notes']
-        id_mood1 = day['id_mood1']
-        day = Day()
-        day.id_user = user.id
-        day.date = date_of_day
-        day.title = title
-        day.notes = notes
-        day.id_mood1 = id_mood1
+        if user is None:
+            return {
+                "success": False,
+                "text": "Invalid user_guid."
+            }
+
+        try:
+            title = day['title']
+            notes = day['notes']
+            date_of_day = date(day['date']['year'], day['date']['month'], day['date']['day'])
+            id_mood1 = day['id_mood1']
+            day = Day()
+            day.id_user = user.id
+            day.date = date_of_day
+            day.title = title
+            day.notes = notes
+            day.id_mood1 = id_mood1
+        except Exception:
+            return {
+                "success": False,
+                'text': "Error parsing data."
+            }
+
         self.mappers[Day].add(day)
         return {
             "success": True,
