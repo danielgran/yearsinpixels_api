@@ -56,7 +56,6 @@ class GraphQLProcessor(DataProcessor):
     def set_mapper(self, business_class, user_mapper):
         self.mappers[business_class] = user_mapper
 
-
     def resolve_user(self, obj, info, user_guid):
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         return user
@@ -116,4 +115,3 @@ class GraphQLProcessor(DataProcessor):
             "success": True,
             'text': ""
         }
-
