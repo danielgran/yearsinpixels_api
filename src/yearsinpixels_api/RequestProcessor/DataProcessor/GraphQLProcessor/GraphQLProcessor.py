@@ -1,6 +1,8 @@
 from datetime import date
 from pathlib import Path
+from time import time
 
+import jwt
 from argon2 import PasswordHasher
 from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schema_from_path
 
@@ -22,7 +24,7 @@ class GraphQLProcessor(DataProcessor):
 
         self.mutation = ObjectType("Mutation")
         self.mutation.set_field("register_user", self.register_user)
-        self.mutation.set_field("login", self.login)
+        self.mutation.set_field("login_user", self.login_user)
         self.mutation.set_field("create_day", self.create_day)
 
         path = Path(__file__)
@@ -91,14 +93,31 @@ class GraphQLProcessor(DataProcessor):
             "user_guid": user.guid
         }
 
-    def login(self, obj, info, email, password):
-        # jwt must contain guid of user
+    def login_user(self, obj, info, email, password):
+        try:
+            user_from_database = self.mappers[User].find(Criteria.matches("email", email))
+            password_hasher = PasswordHasher()
+            correct_password = password_hasher.verify(user_from_database.password, password)
+            if not correct_password:
+                raise Exception()
 
-        login_result = {
-            'success': True,
-            'message': '',
-            'jwt': ''
+            jwt_obj = {
+                'user_guid': user_from_database.guid,
+                'expires': int(time()) + 24*60*60
+            }
 
+            encoded_jwt = jwt.encode(jwt_obj, "some-secret", algorithm="HS256")
+
+        except:
+            return {
+            "success": False,
+            "message": "Error logging in"
+        }
+
+        return {
+            "success": True,
+            "message": "",
+            "jwt": encoded_jwt
         }
 
     def create_day(self, obj, info, user_guid, day):

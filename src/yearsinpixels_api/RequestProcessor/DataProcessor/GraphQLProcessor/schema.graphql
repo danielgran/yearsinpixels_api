@@ -5,7 +5,7 @@ type Query {
 
 type Mutation {
     register_user(email: String!, password: String!): RegisterResult
-    login(email: String!, password: String!): LoginResult
+    login_user(email: String!, password: String!): LoginResult
 
     create_day(user_guid: String!, day: DayInput): BoolResult
 }
