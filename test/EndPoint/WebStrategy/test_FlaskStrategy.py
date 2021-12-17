@@ -21,4 +21,4 @@ class TestFlaskStrategy(unittest.TestCase):
     def test_cors_policy_endpoint(self):
         self.strategy.setup_service(None)
         return_from_options = self.strategy.catch_options(None)
-        self.assertEqual(return_from_options, ('', 200, {'Accaess-Control-Allow-Origsiaan': '*', 'asdd': 'sfg'}))
+        self.assertEqual(return_from_options, ('', 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*'}))

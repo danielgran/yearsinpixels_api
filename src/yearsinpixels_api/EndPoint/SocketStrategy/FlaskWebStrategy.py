@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request
 
 from yearsinpixels_api.EndPoint.SocketStrategy.WebStrategy import WebStrategy
 from yearsinpixels_api.Request.HTMLHeader import HTMLHeader
@@ -28,7 +28,7 @@ class FlaskWebStrategy(WebStrategy):
         self.flask_app.run(host="localhost", port=5555)
 
     def catch_options(self, path):
-        return_headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*', 'X-Stupid': 'No'}
+        return_headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*'}
 
         return '', 200, return_headers
 
