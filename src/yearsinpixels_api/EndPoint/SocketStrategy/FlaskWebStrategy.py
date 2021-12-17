@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, Response
 
 from yearsinpixels_api.EndPoint.SocketStrategy.WebStrategy import WebStrategy
 from yearsinpixels_api.Request.HTMLHeader import HTMLHeader
@@ -19,12 +19,19 @@ class FlaskWebStrategy(WebStrategy):
 
     def setup_service(self, request_callback):
         self.request_callback = request_callback
+        self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_options, methods=['OPTIONS'])
         self.flask_app.add_url_rule("/", view_func=self.catch_all_route , defaults={'path': ''})
-        self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_all_route)
+        self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_all_route, methods=['GET', 'POST'])
 
     def run(self):
         self.running = True
-        self.flask_app.run(host="localhost", port=8080)
+        self.flask_app.run(host="localhost", port=5555)
+
+    def catch_options(self, path):
+        return_headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*', 'X-Stupid': 'No'}
+
+        return '', 200, return_headers
+
 
 
     async def catch_all_route(self, path):
@@ -35,6 +42,7 @@ class FlaskWebStrategy(WebStrategy):
         backend_request.request_cookies = request.cookies.to_dict()
         backend_request.arguments = request.args.to_dict()
 
-        req_guid = self.request_callback(backend_request)
+        response = self.request_callback(backend_request)
 
-        return req_guid
+
+        return str(response.body), 200, {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
