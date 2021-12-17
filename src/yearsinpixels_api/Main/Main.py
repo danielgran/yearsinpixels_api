@@ -1,6 +1,7 @@
 from yearsinpixels_business.Entity.Day import Day
 from yearsinpixels_business.Entity.Mood import Mood
 from yearsinpixels_business.Entity.User import User
+
 from yearsinpixels_data.Gateway.MySQLGateway import MySQLGateway
 
 from yearsinpixels_api.EndPoint.EndPoint import EndPoint
@@ -34,11 +35,11 @@ def setup_webhost(webhost):
     day_mapper = DayMapper(mysql_gateway)
     graqh_ql_processor.set_mapper(Day, day_mapper)
 
-    data_request_queue.reqister_processor("/test", graqh_ql_processor)
+    data_request_queue.reqister_processor("/api", graqh_ql_processor)
 
     webhost.setup_expose_strategy(expose_strategy)
 
-    test_endpoint = EndPoint("/test")
+    test_endpoint = EndPoint("/api")
     test_endpoint.set_request_queue(request_queue=data_request_queue)
 
     webhost.add_endpoint(test_endpoint)

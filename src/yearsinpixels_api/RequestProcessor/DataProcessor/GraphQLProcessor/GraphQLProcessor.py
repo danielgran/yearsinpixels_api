@@ -1,10 +1,11 @@
+import json
 from datetime import date
 from pathlib import Path
-from time import time
 
 import jwt
 from argon2 import PasswordHasher
 from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schema_from_path
+from time import time
 
 from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
@@ -51,7 +52,7 @@ class GraphQLProcessor(DataProcessor):
             debug=__debug__
         )
 
-        return_string = str(result)
+        return_string = json.dumps(result)
         response.body = return_string
 
         return response
@@ -103,16 +104,16 @@ class GraphQLProcessor(DataProcessor):
 
             jwt_obj = {
                 'user_guid': user_from_database.guid,
-                'expires': int(time()) + 24*60*60
+                'expires': int(time()) + 24 * 60 * 60
             }
 
             encoded_jwt = jwt.encode(jwt_obj, "some-secret", algorithm="HS256")
 
         except:
             return {
-            "success": False,
-            "message": "Error logging in"
-        }
+                "success": False,
+                "message": "Error logging in"
+            }
 
         return {
             "success": True,
