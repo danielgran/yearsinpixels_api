@@ -22,6 +22,7 @@ class GraphQLProcessor(DataProcessor):
         self.query = ObjectType("Query")
         self.query.set_field("user", self.resolve_user)
         self.query.set_field("days", self.resolve_days)
+        self.query.set_field("moods", self.resolve_moods)
 
         self.mutation = ObjectType("Mutation")
         self.mutation.set_field("register_user", self.register_user)
@@ -72,6 +73,10 @@ class GraphQLProcessor(DataProcessor):
             mood1_for_day = next(mood for mood in moods if day.id_mood1 == mood.id)
             day.mood1 = mood1_for_day
         return days
+
+    def resolve_moods(self, obj, info):
+        moods = self.mappers[Mood].find_all()
+        return moods
 
     def register_user(self, obj, info, email, password):
         user = User()

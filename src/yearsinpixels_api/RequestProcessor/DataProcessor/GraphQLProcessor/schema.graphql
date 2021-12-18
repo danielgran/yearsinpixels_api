@@ -1,6 +1,7 @@
 type Query {
     user(user_guid: String!): User
     days(user_guid: String!): [Day]
+    moods: [Mood]
 }
 
 type Mutation {
