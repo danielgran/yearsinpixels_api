@@ -1,4 +1,4 @@
-import json
+from json import dumps
 from datetime import date
 from pathlib import Path
 
@@ -53,7 +53,7 @@ class GraphQLProcessor(DataProcessor):
             debug=__debug__
         )
 
-        return_string = json.dumps(result)
+        return_string = dumps(result)
         response.body = return_string
 
         return response
