@@ -82,6 +82,14 @@ class GraphQLProcessor(DataProcessor):
         except:
             raise GraphQLError(message="Not allowed")
 
+    def validate_token(self, info_context):
+        try:
+            token = info_context.context['request_header'].items['Authorization']
+            result = jwt.decode(token.split()[1], "some-secret", algorithms=["HS256"])
+        except:
+            raise GraphQLError(message="Not allowed")
+
+
     def resolve_user(self, obj, info, user_guid):
         self.validate_token_with_user(info, user_guid)
 
@@ -99,7 +107,7 @@ class GraphQLProcessor(DataProcessor):
         return days
 
     def resolve_moods(self, obj, info):
-        self.validate_token_with_user(info, user_guid)
+        self.validate_token(info)
         moods = self.mappers[Mood].find_all()
         return moods
 
