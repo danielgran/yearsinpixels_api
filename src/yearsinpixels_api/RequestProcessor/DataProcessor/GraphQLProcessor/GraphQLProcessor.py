@@ -89,6 +89,7 @@ class GraphQLProcessor(DataProcessor):
         return user
 
     def resolve_days(self, obj, info, user_guid):
+        self.validate_token_with_user(info, user_guid)
         user_from_database = self.mappers[User].find(Criteria.matches("guid", user_guid))
         days = self.mappers[Day].find_all_from_user(Criteria.matches("id_user", user_from_database.id))
         moods = self.mappers[Mood].find_all()
@@ -98,6 +99,7 @@ class GraphQLProcessor(DataProcessor):
         return days
 
     def resolve_moods(self, obj, info):
+        self.validate_token_with_user(info, user_guid)
         moods = self.mappers[Mood].find_all()
         return moods
 
@@ -150,6 +152,7 @@ class GraphQLProcessor(DataProcessor):
         }
 
     def create_day(self, obj, info, user_guid, day):
+        self.validate_token_with_user(info, user_guid)
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         if user is None:
             return {
