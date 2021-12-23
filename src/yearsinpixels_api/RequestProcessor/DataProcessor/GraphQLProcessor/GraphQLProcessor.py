@@ -10,6 +10,7 @@ from time import time
 
 from yearsinpixels_api.Request.Response import Response
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
+from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GoogleCaptcha import GoogleCaptcha
 from yearsinpixels_business.Entity.Day import Day
 from yearsinpixels_business.Entity.Mood import Mood
 from yearsinpixels_business.Entity.User import User
@@ -35,6 +36,8 @@ class GraphQLProcessor(DataProcessor):
         self.path = f"{path}/schema.graphql"
 
         self.update_schema()
+
+        self.googlecaptcha = GoogleCaptcha("6LeVFcMdAAAAAAzKjzi8150MEJf_dDquCQv9u3Zi")
 
     def update_schema(self):
         self.schema = make_executable_schema(
@@ -132,8 +135,10 @@ class GraphQLProcessor(DataProcessor):
             "user_guid": user.guid
         }
 
-    def login_user(self, obj, info, email, password):
+    def login_user(self, obj, info, email, password, captcha):
         try:
+            assert self.googlecaptcha.verify_captcha(captcha)
+
             user_from_database = self.mappers[User].find(Criteria.matches("email", email))
             password_hasher = PasswordHasher()
             correct_password = password_hasher.verify(user_from_database.password, password)
