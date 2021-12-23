@@ -16,6 +16,7 @@ class ResponseTest(unittest.TestCase):
     def test_metadata(self):
         self.assertIsNotNone(self.response.request)
         self.assertIsNotNone(self.response.body)
+        self.assertIsNotNone(self.response.code)
 
     def test_toString(self):
         self.assertEqual(str(self.response), ":-)")
