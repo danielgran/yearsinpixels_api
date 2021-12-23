@@ -1,10 +1,12 @@
-from json import dumps
 from datetime import date
+from json import dumps
 from pathlib import Path
 
 import jwt
 from argon2 import PasswordHasher
 from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schema_from_path
+from ariadne.graphql import validate_data, parse_query
+from graphql import GraphQLError
 from time import time
 
 from yearsinpixels_api.Request.Response import Response
@@ -47,33 +49,44 @@ class GraphQLProcessor(DataProcessor):
         # google captcha
         response = Response(request)
 
+        data = request.body
+
         success, result = graphql_sync(
-            data=request.body,
+            context_value={
+                "request_header": request.header
+            },
+            data=data,
             schema=self.schema,
-            debug=__debug__
+            debug=__debug__,
         )
 
-        return_string = dumps(result)
-        response.body = return_string
+        if success:
+            return_string = dumps(result)
+            response.body = return_string
+            response.code = 200
+        else:
+            response.body = "Error occured"
+            response.code = 400
 
         return response
 
     def set_mapper(self, business_class, user_mapper):
         self.mappers[business_class] = user_mapper
 
-    def validate_token_with_user(self, token, user_guid):
+    def validate_token_with_user(self, info_context, user_guid):
         try:
+            token = info_context.context['request_header'].items['Authorization']
+
             result = jwt.decode(token, "some-secret", algorithms=["HS256"])
-            if result.get("user_guid") != user_guid:
+            if result.get("user_guid") != user_guid or result.get("expires") < time():
                 raise Exception()
-            if (result.get("expires") < time()):
-                raise Exception()
-            return True
         except:
-            return False
+            raise GraphQLError(message="Not allowed")
 
 
     def resolve_user(self, obj, info, user_guid):
+        self.validate_token_with_user(info, user_guid)
+
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         return user
 
