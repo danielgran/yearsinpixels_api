@@ -20,7 +20,7 @@ class FlaskWebStrategy(WebStrategy):
     def setup_service(self, request_callback):
         self.request_callback = request_callback
         self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_options, methods=['OPTIONS'])
-        self.flask_app.add_url_rule("/", view_func=self.catch_all_route , defaults={'path': ''})
+        self.flask_app.add_url_rule("/", view_func=self.catch_all_route, defaults={'path': ''})
         self.flask_app.add_url_rule("/<path:path>", view_func=self.catch_all_route, methods=['GET', 'POST'])
 
     def run(self):
@@ -32,8 +32,6 @@ class FlaskWebStrategy(WebStrategy):
 
         return '', 200, return_headers
 
-
-
     async def catch_all_route(self, path):
         backend_request = Request(request.path)
 
@@ -44,5 +42,5 @@ class FlaskWebStrategy(WebStrategy):
 
         response = self.request_callback(backend_request)
 
-
-        return str(response.body), response.code, {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
+        return str(response.body), response.code, {'Access-Control-Allow-Origin': '*',
+                                                   'Content-Type': 'application/json'}
