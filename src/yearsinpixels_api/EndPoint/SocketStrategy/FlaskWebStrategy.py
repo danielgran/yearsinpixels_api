@@ -45,4 +45,4 @@ class FlaskWebStrategy(WebStrategy):
         response = self.request_callback(backend_request)
 
 
-        return str(response.body), 200, {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
+        return str(response.body), response.code, {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
