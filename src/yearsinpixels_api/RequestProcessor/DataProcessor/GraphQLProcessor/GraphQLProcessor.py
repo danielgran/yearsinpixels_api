@@ -61,6 +61,18 @@ class GraphQLProcessor(DataProcessor):
     def set_mapper(self, business_class, user_mapper):
         self.mappers[business_class] = user_mapper
 
+    def validate_token_with_user(self, token, user_guid):
+        try:
+            result = jwt.decode(token, "some-secret", algorithms=["HS256"])
+            if result.get("user_guid") != user_guid:
+                raise Exception()
+            if (result.get("expires") < time()):
+                raise Exception()
+            return True
+        except:
+            return False
+
+
     def resolve_user(self, obj, info, user_guid):
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         return user

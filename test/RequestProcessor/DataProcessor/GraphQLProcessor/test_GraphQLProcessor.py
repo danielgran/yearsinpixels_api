@@ -54,14 +54,10 @@ class GraphQLProcessorTest(unittest.TestCase):
         resolved_user = self.graphql_processor.resolve_user(None, None, user.guid)
         self.assertTrue(user == resolved_user)
 
-    #def test_create_day(self):
-        #self.graphql_processor.set_mapper()
-        #input = {'date': {'year': 2021, 'month': 12, 'day': 1}, 'id_mood1': 1, 'title': 'asdf', 'notes': 'some-notes'}
-        #user = User()
-        #user.id = 1#
-
-        #response = self.graphql_processor.create_day(None, None, user, input)
-
-        #self.assertTrue(response["success"])
+    def test_validate_token_with_user(self):
+        token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2d1aWQiOiIxNzc0Mzc1NC01MTkyLTQyM2YtYTVhYi0xNzk3ZmI2NzQwODEiLCJleHBpcmVzIjoxNjQwMzU3OTA3fQ.0Jsnw3k44U6jNiqwFhgtePX_KXR_euzbCLkP1bzfqM8"
+        user_guid = "17743754-5192-423f-a5ab-1797fb674081"
+        result = self.graphql_processor.validate_token_with_user(token, user_guid)
+        self.assertTrue(result)
 
 
