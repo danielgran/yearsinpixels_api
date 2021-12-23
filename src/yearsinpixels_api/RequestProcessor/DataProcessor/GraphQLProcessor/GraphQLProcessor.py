@@ -5,7 +5,6 @@ from pathlib import Path
 import jwt
 from argon2 import PasswordHasher
 from ariadne import make_executable_schema, graphql_sync, ObjectType, load_schema_from_path
-from ariadne.graphql import validate_data, parse_query
 from graphql import GraphQLError
 from time import time
 
@@ -77,12 +76,11 @@ class GraphQLProcessor(DataProcessor):
         try:
             token = info_context.context['request_header'].items['Authorization']
 
-            result = jwt.decode(token, "some-secret", algorithms=["HS256"])
+            result = jwt.decode(token.split()[1], "some-secret", algorithms=["HS256"])
             if result.get("user_guid") != user_guid or result.get("expires") < time():
                 raise Exception()
         except:
             raise GraphQLError(message="Not allowed")
-
 
     def resolve_user(self, obj, info, user_guid):
         self.validate_token_with_user(info, user_guid)

@@ -1,10 +1,10 @@
 import unittest
 
-from yearsinpixels_data.Gateway.TestGateway import TestGateway
-
-from yearsinpixels_business.Entity.User import User
+from yearsinpixels_api.Request.HTMLHeader import HTMLHeader
 from yearsinpixels_api.RequestProcessor.DataProcessor.DataProcessor import DataProcessor
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
+from yearsinpixels_business.Entity.User import User
+from yearsinpixels_data.Gateway.TestGateway import TestGateway
 from yearsinpixels_data.Mapper.UserMapper import UserMapper
 
 
@@ -57,7 +57,14 @@ class GraphQLProcessorTest(unittest.TestCase):
     def test_validate_token_with_user(self):
         token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2d1aWQiOiIxNzc0Mzc1NC01MTkyLTQyM2YtYTVhYi0xNzk3ZmI2NzQwODEiLCJleHBpcmVzIjoxNjQwMzU3OTA3fQ.0Jsnw3k44U6jNiqwFhgtePX_KXR_euzbCLkP1bzfqM8"
         user_guid = "17743754-5192-423f-a5ab-1797fb674081"
-        result = self.graphql_processor.validate_token_with_user(token, user_guid)
-        self.assertTrue(result)
+        header = HTMLHeader()
+        header.items["Authorization"] = "Bearer " + token
+        context = {
+            "request_header": header
+        }
 
+        class info_context:
+            def __init__(self, context):
+                self.context = context
 
+        self.graphql_processor.validate_token_with_user(info_context(context), user_guid)
