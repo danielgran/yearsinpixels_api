@@ -26,7 +26,7 @@ def setup_webhost(webhost):
 
     graqh_ql_processor = GraphQLProcessor()
 
-    mysql_gateway = MySQLGateway(username='root', password='somepass', database='yearsinpixels')
+    mysql_gateway = MySQLGateway(username='yearsinpixels', password='pvM9MFVNuq5HgkdP#', database='yearsinpixels')
     mysql_gateway.connect()
     user_mapper = UserMapper(mysql_gateway)
     graqh_ql_processor.set_mapper(User, user_mapper)
