@@ -114,14 +114,16 @@ class GraphQLProcessor(DataProcessor):
         moods = self.mappers[Mood].find_all()
         return moods
 
-    def register_user(self, obj, info, email, password):
-        user = User()
-        user.email = email
-        password_hasher = PasswordHasher()
-        password_hash = password_hasher.hash(password)
-        user.password = password_hash
+    def register_user(self, obj, info, email, password, captcha):
 
         try:
+            assert self.googlecaptcha.verify_captcha(captcha)
+
+            user = User()
+            user.email = email
+            password_hasher = PasswordHasher()
+            password_hash = password_hasher.hash(password)
+            user.password = password_hash
             self.mappers[User].add(user)
         except:
             return {

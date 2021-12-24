@@ -5,7 +5,7 @@ type Query {
 }
 
 type Mutation {
-    register_user(email: String!, password: String!): RegisterResult
+    register_user(email: String!, password: String!, captcha: String!): RegisterResult
     login_user(email: String!, password: String!, captcha: String!): LoginResult
 
     create_day(user_guid: String!, day: DayInput): BoolResult
