@@ -167,7 +167,7 @@ class GraphQLProcessor(DataProcessor):
         }
 
     def create_day(self, obj, info, user_guid, day):
-        self.validate_token_with_user(info, user_guid)
+        #self.validate_token_with_user(info, user_guid)
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         if user is None:
             return {
