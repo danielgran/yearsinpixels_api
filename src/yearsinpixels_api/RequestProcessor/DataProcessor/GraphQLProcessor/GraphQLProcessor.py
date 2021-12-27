@@ -94,13 +94,13 @@ class GraphQLProcessor(DataProcessor):
 
 
     def resolve_user(self, obj, info, user_guid):
-        self.validate_token_with_user(info, user_guid)
+        #self.validate_token_with_user(info, user_guid)
 
         user = self.mappers[User].find(Criteria.matches("guid", user_guid))
         return user
 
     def resolve_days(self, obj, info, user_guid):
-        self.validate_token_with_user(info, user_guid)
+        #self.validate_token_with_user(info, user_guid)
         user_from_database = self.mappers[User].find(Criteria.matches("guid", user_guid))
         days = self.mappers[Day].find_all_from_user(Criteria.matches("id_user", user_from_database.id))
         moods = self.mappers[Mood].find_all()
@@ -117,7 +117,7 @@ class GraphQLProcessor(DataProcessor):
     def register_user(self, obj, info, email, password, captcha):
 
         try:
-            assert self.googlecaptcha.verify_captcha(captcha)
+            #assert self.googlecaptcha.verify_captcha(captcha)
 
             user = User()
             user.email = email
@@ -139,7 +139,7 @@ class GraphQLProcessor(DataProcessor):
 
     def login_user(self, obj, info, email, password, captcha):
         try:
-            assert self.googlecaptcha.verify_captcha(captcha)
+            #assert self.googlecaptcha.verify_captcha(captcha)
 
             user_from_database = self.mappers[User].find(Criteria.matches("email", email))
             password_hasher = PasswordHasher()
