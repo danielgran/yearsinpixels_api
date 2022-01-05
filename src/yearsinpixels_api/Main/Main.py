@@ -1,6 +1,7 @@
 from yearsinpixels_business.Entity.Day import Day
 from yearsinpixels_business.Entity.Mood import Mood
 from yearsinpixels_business.Entity.User import User
+from yearsinpixels_data.Database.MySQLConnection import MySQLConnection
 
 from yearsinpixels_data.Gateway.MySQLGateway import MySQLGateway
 
@@ -26,8 +27,15 @@ def setup_webhost(webhost):
 
     graqh_ql_processor = GraphQLProcessor()
 
-    mysql_gateway = MySQLGateway(username='yearsinpixels', password='pvM9MFVNuq5HgkdP#', database='yearsinpixels')
-    mysql_gateway.connect()
+    username = "root"
+    password = "somepass"
+    host = "localhost"
+    port = 3306
+    database = "yearsinpixels"
+    mysqlconnection = MySQLConnection(username=username, password=password, host=host, port=port,
+                                           database=database)
+    mysqlconnection.connect()
+    mysql_gateway = MySQLGateway(mysqlconnection)
     user_mapper = UserMapper(mysql_gateway)
     graqh_ql_processor.set_mapper(User, user_mapper)
     mood_mapper = MoodMapper(mysql_gateway)
