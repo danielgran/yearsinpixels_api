@@ -27,8 +27,8 @@ def setup_webhost(webhost):
 
     graqh_ql_processor = GraphQLProcessor()
 
-    username = "root"
-    password = "somepass"
+    username = "yearsinpixels"
+    password = "pvM9MFVNuq5HgkdP#"
     host = "localhost"
     port = 3306
     database = "yearsinpixels"
