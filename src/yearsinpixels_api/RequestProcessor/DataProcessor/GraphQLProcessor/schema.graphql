@@ -33,6 +33,7 @@ type Day {
 input DayInput {
     date: DateInput!
     id_mood1: Int!
+    id_mood2: Int
     title: String!
     notes: String
 }

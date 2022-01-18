@@ -178,19 +178,22 @@ class GraphQLProcessor(DataProcessor):
             notes = day['notes']
             date_of_day = date(day['date']['year'], day['date']['month'], day['date']['day'])
             id_mood1 = day['id_mood1']
-            day = Day()
-            day.id_user = user.id
-            day.date = date_of_day
-            day.title = title
-            day.notes = notes
-            day.id_mood1 = id_mood1
+
+            day_to_db = Day()
+            day_to_db.id_user = user.id
+            day_to_db.date = date_of_day
+            day_to_db.title = title
+            day_to_db.notes = notes
+            day_to_db.id_mood1 = id_mood1
+            if "id_mood2" in day:
+                day_to_db.id_mood2 = day['id_mood2']
         except Exception:
             return {
                 "success": False,
                 'text': "Error parsing data."
             }
 
-        self.mappers[Day].add(day)
+        self.mappers[Day].add(day_to_db)
         return {
             "success": True,
             'text': ""
