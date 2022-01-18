@@ -105,6 +105,9 @@ class GraphQLProcessor(DataProcessor):
         for day in days:
             mood1_for_day = next(mood for mood in moods if day.id_mood1 == mood.id)
             day.mood1 = mood1_for_day
+            if day.id_mood2 is not None or 0:
+                mood1_for_day = next(mood for mood in moods if day.id_mood2 == mood.id)
+                day.mood2 = mood1_for_day
         return days
 
     def resolve_moods(self, obj, info):

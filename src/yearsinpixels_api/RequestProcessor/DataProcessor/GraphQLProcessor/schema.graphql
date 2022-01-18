@@ -28,6 +28,7 @@ type Day {
     title: String
     notes: String
     mood1: Mood
+    mood2: Mood
 }
 
 input DayInput {
