@@ -24,16 +24,20 @@ def main():
     webhost.run()
 
 def setup_webhost(webhost):
-    expose_strategy = FlaskWebStrategy()
-    data_request_queue = RequestQueue()
-
-    graqh_ql_processor = GraphQLProcessor()
-
     username = os.environ.get("MYSQL_USER")
     password = os.getenv("MYSQL_PASSWORD")
     host = os.getenv("MYSQL_HOST")
     port = os.getenv("MYSQL_PORT")
     database = os.getenv("MYSQL_DATABASE")
+    api_host = os.getenv("API_HOST")
+    api_port = os.getenv("API_PORT")
+
+    expose_strategy = FlaskWebStrategy(api_host, api_port)
+    data_request_queue = RequestQueue()
+
+    graqh_ql_processor = GraphQLProcessor()
+
+
     mysqlconnection = MySQLConnection(username=username, password=password, host=host, port=port,
                                            database=database)
     mysqlconnection.connect()

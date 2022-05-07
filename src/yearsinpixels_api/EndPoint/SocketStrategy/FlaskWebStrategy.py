@@ -7,11 +7,13 @@ from yearsinpixels_api.Request.Request import Request
 
 class FlaskWebStrategy(WebStrategy):
 
-    def __init__(self):
+    def __init__(self, hostname="localhost", port=5555):
         # The request callback is the method processed further by the webhost. Flask Strategy just handles getting the data
         self.request_callback = None
         self.flask_app = None
         self.running = False
+        self.hostname = hostname
+        self.port = port
         self.flask_app = Flask("yip_backend")
 
     def is_running(self):
@@ -25,7 +27,7 @@ class FlaskWebStrategy(WebStrategy):
 
     def run(self):
         self.running = True
-        self.flask_app.run(host="localhost", port=5555)
+        self.flask_app.run(host=self.hostname, port=self.port)
 
     def catch_options(self, path):
         return_headers = {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*'}
