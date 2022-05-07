@@ -29,7 +29,7 @@ def setup_webhost(webhost):
 
     graqh_ql_processor = GraphQLProcessor()
 
-    username = os.environ.get("USER")
+    username = os.environ.get("MYSQL_USER")
     password = os.getenv("MYSQL_PASSWORD")
     host = os.getenv("MYSQL_HOST")
     port = os.getenv("MYSQL_PORT")
