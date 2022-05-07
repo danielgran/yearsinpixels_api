@@ -13,5 +13,5 @@ ENV MYSQL_USER=root
 ENV MYSQL_PASSWORD=root
 ENV MYSQL_DATABASE=yearsinpixels
 
-EXPOSE 9090
+EXPOSE 5555
 CMD ["python3", "/backend/src/yearsinpixels_api/Main/Main.py"]
