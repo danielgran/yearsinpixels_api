@@ -1,3 +1,5 @@
+import os
+
 from yearsinpixels_business.Entity.Day import Day
 from yearsinpixels_business.Entity.Mood import Mood
 from yearsinpixels_business.Entity.User import User
@@ -11,8 +13,8 @@ from yearsinpixels_api.Main.ConcreteFactory import ConcreteFactory
 from yearsinpixels_api.RequestProcessor.DataProcessor.GraphQLProcessor.GraphQLProcessor import GraphQLProcessor
 from yearsinpixels_api.RequestQueue.RequestQueue import RequestQueue
 from yearsinpixels_data.Mapper.DayMapper import DayMapper
-from yearsinpixels_data.Mapper.MoodMapper import MoodMapper
 from yearsinpixels_data.Mapper.UserMapper import UserMapper
+from yearsinpixels_data.Mapper.MoodMapper import MoodMapper
 
 
 def main():
@@ -27,11 +29,11 @@ def setup_webhost(webhost):
 
     graqh_ql_processor = GraphQLProcessor()
 
-    username = "yearsinpixels"
-    password = "pvM9MFVNuq5HgkdP#"
-    host = "localhost"
-    port = 3306
-    database = "yearsinpixels"
+    username = os.environ.get("USER")
+    password = os.getenv("MYSQL_PASSWORD")
+    host = os.getenv("MYSQL_HOST")
+    port = os.getenv("MYSQL_PORT")
+    database = os.getenv("MYSQL_DATABASE")
     mysqlconnection = MySQLConnection(username=username, password=password, host=host, port=port,
                                            database=database)
     mysqlconnection.connect()
